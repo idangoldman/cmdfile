@@ -9,6 +9,3 @@ def main():
 
   for arg in args:
     print('passed argument :: {}'.format(arg))
-
-if __name__ == '__main__':
-  main()
