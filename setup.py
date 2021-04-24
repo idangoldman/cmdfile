@@ -8,7 +8,6 @@ setup(
     author_email = 'idan@123code.co',
     description = 'command line tool',
     keywords = [''],
-    packages = ['cmd'],
     platform = 'any',
     license = 'MIT',
     scripts = ['bin/cmd']
