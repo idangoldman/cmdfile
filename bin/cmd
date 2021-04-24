@@ -1,9 +1,11 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-# import sys
-from cmd.main import main
+import os
+import sys
 
-# print(f"Name of the script      : {sys.argv[0]=}")
-# print(f"Arguments of the script : {sys.argv[1:]=}")
+if __name__ == '__main__':
+  sys.path.append(os.getcwd() + '/src')
 
-main()
+  from main import run
+
+  sys.exit(run())
