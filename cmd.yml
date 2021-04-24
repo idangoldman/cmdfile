@@ -1,0 +1,129 @@
+# --extend
+# --list
+# --package
+# --path
+# --remote
+# --sudo
+# add [name]
+# delete [name]
+# help --help
+# init [name]
+# install [name]
+# [command] [action] [flags]
+
+
+net:
+  uptime: "uptime"
+  hosts: "sudo vim /ect/hosts"
+  dns-flush: "sudo killall -HUP mDNSResponder"
+  mkcert: "mkcert -cert-file ./certs/{{ DOMAIN_NAME }}.crt -key-file ./certs/{{ DOMAIN_NAME }}.key \"{{ DOMAIN_NAME }}\" \"*.{{ DOMAIN_NAME }}\""
+
+ch:
+  sudo: true
+  commands:
+    own: "chown -R {{ USER }}:{{ GROUP }} {{ PATH }}"
+    mod-folder: "find {{ PATH }} -type d -exec chmod 775 {}"
+    mod-file: "find {{ PATH }} -type f -exec chmod 664 {}"
+
+permissions:
+  wordpress:
+    sudo: true
+    command:
+      - "chown -R www-data:www-data {{ WORDPRESS_PATH }}"
+      - "find {{ WORDPRESS_PATH }} -type d -exec chmod 775 {}"
+      - "find {{ WORDPRESS_PATH }} -type f -exec chmod 664 {}"
+
+wp-finder:
+  package: composer
+  remote:
+    host: ['hulk']
+    path: ~/containers/wp-finder
+  commands:
+    build: "composer install --quiet --no-dev --no-interaction --no-cache --optimize-autoloader --classmap-authoritative"
+    setup: "composer install; composer phpcs-include-rules"
+    pot: "wp i18n make-pot . languages/wp-finder.pot --exclude=\".github,.wordpress-org,node_modules,tests,vendor\""
+    phpcs: "phpcs"
+    phpcs-fix: "phpcbf"
+    phpcs-include-rules: "phpcs --config-set installed_paths vendor/phpcompatibility/php-compatibility/,vendor/wp-coding-standards/wpcs/"
+
+brew:
+  package: brewfile
+  environment:
+    HOMEBREW_BREWFILE: "./Brewfile"
+  commands:
+    install: "brew file install"
+    up:
+      - "brew update"
+      - "brew upgrade"
+      - "brew cask upgrade --greedy"
+      - "brew cleanup"
+      - "brew doctor"
+      - "brew cask doctor"
+
+apt:
+  sudo: true
+  remote: ['hulk', 'pihole']
+  commands:
+    up:
+      - "apt update"
+      - "apt upgrade -y"
+      - "apt autoremove -y"
+
+find:
+  commands:
+    all: "find / -iname {{ NAME }}"
+    where: "find ./ -iname {{ NAME }}"
+
+git:
+  flush:
+    command: "git rm -r --cached .; git add .; git status"
+    help: "Refresh your git repository, and clean those deleted files."
+  retag: "git push --delete origin {{ TAG_NAME }}; git tag -d {{ TAG_NAME }}; git tag {{ TAG_NAME }}; git push --tags"
+  commit-init: "git add .; git commit -m \"Initial commit.\""
+  commit-all: "git add .; git commit -m \"{{ COMMIT_MESSAGE }}\""
+  remove: "git branch -D {{ BRANCH_NAME }};"
+  delete: "git branch -D {{ BRANCH_NAME }}; git push {{ REMOTE_NAME }} :{{ BRANCH_NAME }};"
+
+zsh:
+  path: $HOME
+  commands:
+    edit: "vim ~/.zshrc"
+    reload: "source ~/.zshrc"
+
+docker:
+  package: docker
+  commands:
+    load: "docker-compose down; docker-compose up -d"
+    log: "docker-compose logs -f {{ CONTAINER_NAME }}"
+    logs: "docker-compose logs -f"
+    reload: "docker-compose down; docker-compose up -d; docker-compose logs -f"
+    shell: "docker-compose exec -it {{ CONTAINER_NAME }} /bin/bash"
+    start: "docker-compose up -d"
+    stop: "docker-compose down"
+
+node:
+  package: yarn
+  commands:
+    add: "yarn add {{ PACKAGE_NAME }}"
+    clean: "rm -fr node_modules"
+    dev-add: "yarn add --dev {{ PACKAGE_NAME }}"
+    publish: "npm publish --access=public"
+    reload: "yarn clean; yarn install"
+    remove: "yarn remove {{ PACKAGE_NAME }}"
+    test: "jest --config jest.config.json"
+    test:coverage: "jest --config jest.config.json --coverage"
+    test:coverage:open: "open .coverage/lcov-report/index.html"
+    test:update:snapshot: "jest --config jest.config.json --updateSnapshot"
+    test:watch: "jest --config jest.config.json --watchAll"
+
+jekyll:
+  install: "bundle install --path vendor/bundle"
+  clean: "bundle exec jekyll clean; bundle exec jekyll doctor"
+  kill: "kill $(ps aux | grep '[j]ekyll' | awk '{print $2}')"
+
+mediacenter:
+  remote: ['hulk']
+  path:
+    - ~/containers/mediaserver/
+  commands:
+    reload: "docker-compose down; docker-compose up -d;"
