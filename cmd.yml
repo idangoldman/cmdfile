@@ -9,7 +9,7 @@
 # help --help
 # init [name]
 # install [name]
-# [command] [action] [flags]
+# [command] [action] [-variables] [--flags]
 
 
 net:
