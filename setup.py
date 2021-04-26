@@ -1,14 +1,15 @@
 from setuptools import setup
 
 setup(
-    name = 'cmd',
-    version = '0.1.0',
-    url = 'https://github.com/123code-il/cmd',
     author = 'Idan Goldman',
     author_email = 'idan@123code.co',
     description = 'command line tool',
+    install_requires = ['pyyaml', 'fabric'],
     keywords = [''],
-    platform = 'any',
     license = 'MIT',
-    scripts = ['bin/cmd']
+    name = 'cmd',
+    platform = 'any',
+    scripts = ['bin/cmd'],
+    url = 'https://github.com/123code-il/cmd',
+    version = '0.1.0',
   )
