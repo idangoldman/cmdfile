@@ -4,19 +4,39 @@
 # --path
 # --remote
 # --sudo
+# --verbos
 # add [name]
 # delete [name]
 # help --help
 # init [name]
 # install [name]
 # [command] [action] [-variables] [--flags]
-
+# .netrc, like ssh config file for ftp
 
 net:
-  uptime: "uptime"
-  hosts: "sudo vim /ect/hosts"
-  dns-flush: "sudo killall -HUP mDNSResponder"
-  mkcert: "mkcert -cert-file ./certs/{{ DOMAIN_NAME }}.crt -key-file ./certs/{{ DOMAIN_NAME }}.key \"{{ DOMAIN_NAME }}\" \"*.{{ DOMAIN_NAME }}\""
+  ping: "ping -c 5 google.com"
+
+mac:
+  sudo: true
+  commands:
+    uptime: "uptime"
+    dns-flush: "killall -HUP mDNSResponder"
+    ip: "curl ipecho.net/plain; echo"
+    lan-ip: "ipconfig getifaddr en0"
+    restart: "shutdown -r now"
+    shutdown: " shutdown -h +60"
+    update: "softwareupdate -l"
+    upgrade: "softwareupdate -ia"
+    xcode:
+      sudo: false
+      commands:
+        install: "xcode-select --install"
+        version: "xcode-select --version"
+
+hosts:
+  commands:
+    edit: "sudo vim /etc/hosts"
+    view: "less /etc/hosts"
 
 ch:
   sudo: true
@@ -79,6 +99,7 @@ git:
     command: "git rm -r --cached .; git add .; git status"
     help: "Refresh your git repository, and clean those deleted files."
   retag: "git push --delete origin {{ TAG_NAME }}; git tag -d {{ TAG_NAME }}; git tag {{ TAG_NAME }}; git push --tags"
+  stash: "git add .; git stash"
   commit-init: "git add .; git commit -m \"Initial commit.\""
   commit-all: "git add .; git commit -m \"{{ COMMIT_MESSAGE }}\""
   remove: "git branch -D {{ BRANCH_NAME }};"
@@ -127,3 +148,7 @@ mediacenter:
     - ~/containers/mediaserver/
   commands:
     reload: "docker-compose down; docker-compose up -d;"
+
+web:
+  simple: "python -m SimpleHTTPServer 8000"
+  mkcert: "mkcert -cert-file ./certs/{{ DOMAIN_NAME }}.crt -key-file ./certs/{{ DOMAIN_NAME }}.key \"{{ DOMAIN_NAME }}\" \"*.{{ DOMAIN_NAME }}\""
