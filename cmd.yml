@@ -16,7 +16,7 @@
 
 net:
   ping: "ping -c 5 google.com"
-  ip: "curl ipecho.net/plain; echo"
+  ip: "curl ipecho.net/plain && echo"
   lan-ip: "ipconfig getifaddr en0"
 
 mac:
@@ -60,7 +60,7 @@ wp-finder:
     path: ~/containers/wp-finder
   commands:
     build: "composer install --quiet --no-dev --no-interaction --no-cache --optimize-autoloader --classmap-authoritative"
-    setup: "composer install; composer phpcs-include-rules"
+    setup: "composer install && composer phpcs-include-rules"
     pot: "wp i18n make-pot . languages/wp-finder.pot --exclude=\".github,.wordpress-org,node_modules,tests,vendor\""
     phpcs:
       command: "phpcs"
@@ -96,15 +96,15 @@ find:
 
 git:
   flush:
-    command: "git rm -r --cached .; git add .; git status"
+    command: "git rm -r --cached . && git add . && git status"
     help: "Refresh your git repository, and clean those deleted files."
-  retag: "git push --delete origin {{ TAG_NAME }}; git tag -d {{ TAG_NAME }}; git tag {{ TAG_NAME }}; git push --tags"
-  stash: "git add .; git stash"
+  retag: "git push --delete origin {{ TAG_NAME }} && git tag -d {{ TAG_NAME }} && git tag {{ TAG_NAME }} && git push --tags"
+  stash: "git add . && git stash"
   commit:
-    init: "git add .; git commit -m \"Initial commit.\""
-    all: "git add .; git commit -m \"{{ COMMIT_MESSAGE }}\""
-  remove: "git branch -D {{ BRANCH_NAME }};"
-  delete: "git branch -D {{ BRANCH_NAME }}; git push {{ REMOTE_NAME }} :{{ BRANCH_NAME }};"
+    init: "git add . && git commit -m \"Initial commit.\""
+    all: "git add . && git commit -m \"{{ COMMIT_MESSAGE }}\""
+  remove: "git branch -D {{ BRANCH_NAME }}"
+  delete: "git branch -D {{ BRANCH_NAME }} && git push {{ REMOTE_NAME }} :{{ BRANCH_NAME }} &&"
 
 zsh:
   path: $HOME
@@ -115,10 +115,10 @@ zsh:
 docker:
   package: docker
   commands:
-    load: "docker-compose down; docker-compose up -d"
+    load: "docker-compose down && docker-compose up -d"
     log: "docker-compose logs -f {{ CONTAINER_NAME }}"
     logs: "docker-compose logs -f"
-    reload: "docker-compose down; docker-compose up -d; docker-compose logs -f"
+    reload: "docker-compose down && docker-compose up -d && docker-compose logs -f"
     shell: "docker-compose exec -it {{ CONTAINER_NAME }} /bin/bash"
     start: "docker-compose up -d"
     stop: "docker-compose down"
@@ -130,7 +130,7 @@ node:
     clean: "rm -fr node_modules"
     dev-add: "yarn add --dev {{ PACKAGE_NAME }}"
     publish: "npm publish --access=public"
-    reload: "yarn clean; yarn install"
+    reload: "yarn clean && yarn install"
     remove: "yarn remove {{ PACKAGE_NAME }}"
     test: "jest --config jest.config.json"
     test:coverage: "jest --config jest.config.json --coverage"
@@ -140,7 +140,7 @@ node:
 
 jekyll:
   install: "bundle install --path vendor/bundle"
-  clean: "bundle exec jekyll clean; bundle exec jekyll doctor"
+  clean: "bundle exec jekyll clean && bundle exec jekyll doctor"
   kill: "kill $(ps aux | grep '[j]ekyll' | awk '{print $2}')"
 
 mediacenter:
@@ -148,7 +148,7 @@ mediacenter:
   path:
     - ~/containers/mediaserver/
   commands:
-    reload: "docker-compose down; docker-compose up -d;"
+    reload: "docker-compose down && docker-compose up -d"
 
 web:
   simple: "python -m SimpleHTTPServer 8000"
