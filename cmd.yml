@@ -5,6 +5,7 @@
 # --remote
 # --sudo
 # --verbos
+# --os
 # add [name]
 # delete [name]
 # help --help
@@ -15,23 +16,22 @@
 
 net:
   ping: "ping -c 5 google.com"
+  ip: "curl ipecho.net/plain; echo"
+  lan-ip: "ipconfig getifaddr en0"
 
 mac:
   sudo: true
   commands:
     uptime: "uptime"
     dns-flush: "killall -HUP mDNSResponder"
-    ip: "curl ipecho.net/plain; echo"
-    lan-ip: "ipconfig getifaddr en0"
     restart: "shutdown -r now"
-    shutdown: " shutdown -h +60"
+    shutdown: "shutdown -h +60"
     update: "softwareupdate -l"
     upgrade: "softwareupdate -ia"
-    xcode:
-      sudo: false
-      commands:
-        install: "xcode-select --install"
-        version: "xcode-select --version"
+
+xcode:
+  install: "xcode-select --install"
+  version: "xcode-select --version"
 
 hosts:
   commands:
@@ -62,9 +62,11 @@ wp-finder:
     build: "composer install --quiet --no-dev --no-interaction --no-cache --optimize-autoloader --classmap-authoritative"
     setup: "composer install; composer phpcs-include-rules"
     pot: "wp i18n make-pot . languages/wp-finder.pot --exclude=\".github,.wordpress-org,node_modules,tests,vendor\""
-    phpcs: "phpcs"
-    phpcs-fix: "phpcbf"
-    phpcs-include-rules: "phpcs --config-set installed_paths vendor/phpcompatibility/php-compatibility/,vendor/wp-coding-standards/wpcs/"
+    phpcs:
+      command: "phpcs"
+      commands:
+        fix: "phpcbf"
+        include-rules: "phpcs --config-set installed_paths vendor/phpcompatibility/php-compatibility/,vendor/wp-coding-standards/wpcs/"
 
 brew:
   package: brewfile
@@ -74,11 +76,9 @@ brew:
     install: "brew file install"
     up:
       - "brew update"
-      - "brew upgrade"
-      - "brew cask upgrade --greedy"
+      - "brew upgrade --cask --greedy"
       - "brew cleanup"
       - "brew doctor"
-      - "brew cask doctor"
 
 apt:
   sudo: true
@@ -100,8 +100,9 @@ git:
     help: "Refresh your git repository, and clean those deleted files."
   retag: "git push --delete origin {{ TAG_NAME }}; git tag -d {{ TAG_NAME }}; git tag {{ TAG_NAME }}; git push --tags"
   stash: "git add .; git stash"
-  commit-init: "git add .; git commit -m \"Initial commit.\""
-  commit-all: "git add .; git commit -m \"{{ COMMIT_MESSAGE }}\""
+  commit:
+    init: "git add .; git commit -m \"Initial commit.\""
+    all: "git add .; git commit -m \"{{ COMMIT_MESSAGE }}\""
   remove: "git branch -D {{ BRANCH_NAME }};"
   delete: "git branch -D {{ BRANCH_NAME }}; git push {{ REMOTE_NAME }} :{{ BRANCH_NAME }};"
 
