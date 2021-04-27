@@ -107,10 +107,11 @@ git:
   delete: "git branch -D {{ BRANCH_NAME }} && git push {{ REMOTE_NAME }} :{{ BRANCH_NAME }} &&"
 
 zsh:
-  path: $HOME
+  path: "$HOME"
   commands:
     edit: "vim ~/.zshrc"
     reload: "source ~/.zshrc"
+    restart: "exec \"$SHELL\""
 
 docker:
   package: docker
