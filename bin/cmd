@@ -11,6 +11,6 @@ if __name__ == '__main__':
 
   sys.path.append(package_path)
 
-  from main import run
+  from core import run
 
   sys.exit(run())
