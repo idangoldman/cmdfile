@@ -4,7 +4,7 @@
 # --path
 # --remote
 # --sudo
-# --verbos
+# --output
 # --os
 # add [name]
 # delete [name]
@@ -103,6 +103,17 @@ find:
     where: "find ./ -iname {{ NAME }}"
 
 git:
+  init:
+    variables:
+      commit_message: "Initial commit."
+      remote_repository: ""
+    command:
+      - "rm -fr .git"
+      - "git init"
+      - "git add ."
+      - "git commit -m {{ COMMIT_MESSAGE }}"
+      - "git remote add origin {{ REMOTE_REPOSITORY }}"
+      - "git push origin master --set-upstream --force"
   flush:
     command: "git rm -r --cached . && git add . && git status"
     help: "Refresh your git repository, and clean those deleted files."
