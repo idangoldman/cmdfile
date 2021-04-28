@@ -122,6 +122,7 @@ git:
   commit:
     init: "git add . && git commit -m \"Initial commit.\""
     all: "git add . && git commit -m \"{{ COMMIT_MESSAGE }}\""
+  rollback: "git reset --mixed HEAD~1"
   remove: "git branch -D {{ BRANCH_NAME }}"
   delete: "git branch -D {{ BRANCH_NAME }} && git push {{ REMOTE_NAME }} :{{ BRANCH_NAME }} &&"
 
