@@ -14,6 +14,14 @@
 # [command] [action] [-variables] [--flags]
 # .netrc, like ssh config file for ftp
 
+sqlite:
+  variables:
+    SCHEMA_FILE: schema.db
+    DUMP_FILE: $(date +'%Y%m%d%H%M%S')_dump.db
+  commands:
+    schema: "sqlite3 {{ DB_FILE }} '.schema' > {{ SCHEMA_FILE }}"
+    dump: "sqlite3 {{ DB_FILE }} '.dump' > {{ DUMP_FILE }}"
+
 net:
   ping: "ping -c 5 google.com"
   ip: "curl ipecho.net/plain && echo"
