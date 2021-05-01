@@ -6,6 +6,7 @@
 # --sudo
 # --output
 # --os
+# --show-command
 # add [name]
 # delete [name]
 # help --help
@@ -18,9 +19,12 @@ sqlite:
   variables:
     SCHEMA_FILE: schema.db
     DUMP_FILE: $(date +'%Y%m%d%H%M%S')_dump.db
+    DB_FILE: ""
   commands:
     schema: "sqlite3 {{ DB_FILE }} '.schema' > {{ SCHEMA_FILE }}"
     dump: "sqlite3 {{ DB_FILE }} '.dump' > {{ DUMP_FILE }}"
+
+kill: "kill $(ps aux | grep {{ PROCESS_NAME }} | awk '{print $2}')"
 
 net:
   ping: "ping -c 5 google.com"
@@ -136,10 +140,10 @@ zsh:
 docker:
   package: docker
   commands:
-    load: "docker-compose down && docker-compose up -d"
+    load: "docker-compose down && docker-compose up -d && docker-compose logs -f"
     log: "docker-compose logs -f {{ CONTAINER_NAME }}"
     logs: "docker-compose logs -f"
-    reload: "docker-compose down && docker-compose up -d && docker-compose logs -f"
+    restart: "docker-compose down && docker-compose up -d"
     shell: "docker-compose exec -it {{ CONTAINER_NAME }} /bin/bash"
     start: "docker-compose up -d"
     stop: "docker-compose down"
@@ -151,7 +155,7 @@ node:
     clean: "rm -fr node_modules"
     dev-add: "yarn add --dev {{ PACKAGE_NAME }}"
     publish: "npm publish --access=public"
-    reload: "yarn clean && yarn install"
+    load: "yarn clean && yarn install"
     remove: "yarn remove {{ PACKAGE_NAME }}"
     test: "jest --config jest.config.json"
     test:coverage: "jest --config jest.config.json --coverage"
@@ -160,16 +164,14 @@ node:
     test:watch: "jest --config jest.config.json --watchAll"
 
 jekyll:
-  install: "bundle install --path vendor/bundle"
   clean: "bundle exec jekyll clean && bundle exec jekyll doctor"
+  install: "bundle install --path vendor/bundle"
   kill: "kill $(ps aux | grep '[j]ekyll' | awk '{print $2}')"
 
-mediacenter:
+media:
+  extend: 'docker'
   remote: ['hulk']
-  path:
-    - ~/containers/mediaserver/
-  commands:
-    reload: "docker-compose down && docker-compose up -d"
+  path: ~/containers/mediaserver/
 
 web:
   simple: "python -m SimpleHTTPServer 8000"
