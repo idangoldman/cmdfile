@@ -6,7 +6,7 @@
 # --sudo
 # --output
 # --os
-# --show-command
+# --show-command (dry?)
 # add [name]
 # delete [name]
 # help --help
