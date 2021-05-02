@@ -1,20 +1,3 @@
-# --extend
-# --list
-# --package
-# --path
-# --remote
-# --sudo
-# --output
-# --os
-# --show-command (dry?)
-# add [name]
-# delete [name]
-# help --help
-# init [name]
-# install [name]
-# [command] [action] [-variables] [--flags]
-# .netrc, like ssh config file for ftp
-
 sqlite:
   variables:
     SCHEMA_FILE: schema.db
