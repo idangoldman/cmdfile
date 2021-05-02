@@ -88,6 +88,7 @@ brew:
     install: "brew file install"
     up:
       - "brew update"
+      - "brew upgrade --greedy"
       - "brew upgrade --cask --greedy"
       - "brew cleanup"
       - "brew doctor"
