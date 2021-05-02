@@ -33,35 +33,15 @@ hosts:
     edit: "sudo vim /etc/hosts"
     view: "less /etc/hosts"
 
-ch:
-  sudo: true
-  commands:
-    own: "chown -R {{ USER }}:{{ GROUP }} {{ PATH }}"
-    mod-folder: "find {{ PATH }} -type d -exec chmod 775 {}"
-    mod-file: "find {{ PATH }} -type f -exec chmod 664 {}"
-
-permissions:
-  wordpress:
+wordpress:
+  permissions:
     sudo: true
+    variables:
+      WORDPRESS_PATH: ./
     command:
       - "chown -R www-data:www-data {{ WORDPRESS_PATH }}"
       - "find {{ WORDPRESS_PATH }} -type d -exec chmod 775 {}"
       - "find {{ WORDPRESS_PATH }} -type f -exec chmod 664 {}"
-
-wp-finder:
-  package: composer
-  remote:
-    host: ['hulk']
-    path: ~/containers/wp-finder
-  commands:
-    build: "composer install --quiet --no-dev --no-interaction --no-cache --optimize-autoloader --classmap-authoritative"
-    setup: "composer install && composer phpcs-include-rules"
-    pot: "wp i18n make-pot . languages/wp-finder.pot --exclude=\".github,.wordpress-org,node_modules,tests,vendor\""
-    phpcs:
-      command: "phpcs"
-      commands:
-        fix: "phpcbf"
-        include-rules: "phpcs --config-set installed_paths vendor/phpcompatibility/php-compatibility/,vendor/wp-coding-standards/wpcs/"
 
 brew:
   package: brewfile
@@ -78,7 +58,6 @@ brew:
 
 apt:
   sudo: true
-  remote: ['hulk', 'pihole']
   commands:
     up:
       - "apt update"
@@ -151,11 +130,6 @@ jekyll:
   clean: "bundle exec jekyll clean && bundle exec jekyll doctor"
   install: "bundle install --path vendor/bundle"
   kill: "kill $(ps aux | grep '[j]ekyll' | awk '{print $2}')"
-
-media:
-  extend: 'docker'
-  remote: ['hulk']
-  path: ~/containers/mediaserver/
 
 web:
   simple: "python -m SimpleHTTPServer 8000"
