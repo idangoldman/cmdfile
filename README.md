@@ -1,11 +1,36 @@
 # CMD - Command Line Tool [WIP]
+
+[A Cool GIF]()
+
 Modern way to manage command line aliases using config file.
+
+## Features
+- [] **YAML/JSON** config files
+- [] **Remote**
+- [] **Nested** configurations
+- [] **Context**, folder specific command execution
+- [] **OS** specific commands
+- [] **Sudo**
+- [] **Package**
+- [] **Variables**
+
+## Examples
+
+## Table of Content
+## Background
+
+## Development
+
+## Install for Development only
+```
+git clone git@github.com:123code-il/cmd.git && ./cmd/bin/install
+```
+
+### Commands and Flags
 
 ```
 cmd [command] [action] [-variable] [--flag]
-```
 
-```
 # Commangs
 add [name]
 delete [name]
@@ -35,7 +60,4 @@ install [name]
 ~/.ssh/config
 ```
 
-## Install for Development only
-```
-git clone git@github.com:123code-il/cmd.git && ./cmd/bin/install
-```
+## License
