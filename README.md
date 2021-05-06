@@ -5,14 +5,15 @@
 Modern way to manage command line aliases using config file.
 
 ## Features
-- [] **YAML/JSON** config files
-- [] **Remote**
+- [] **[YAML|JSON|TOML]** config files
+- [] **Sudo**
+- [] **Variables**
 - [] **Nested** configurations
 - [] **Context**, folder specific command execution
 - [] **OS** specific commands
-- [] **Sudo**
+- [] **Remote**
 - [] **Package**
-- [] **Variables**
+- [] **Autocomple**
 
 ## Examples
 
