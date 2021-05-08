@@ -110,6 +110,7 @@ docker:
     shell: "docker-compose exec -it {{ CONTAINER_NAME }} /bin/bash"
     start: "docker-compose up -d"
     stop: "docker-compose down"
+    pull: "docker images | grep -v REPOSITORY | awk '{print $1\":\"$2}' | xargs -L1 docker pull"
 
 node:
   package: yarn
