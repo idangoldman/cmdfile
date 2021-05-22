@@ -7,13 +7,13 @@ Modern way to manage command line aliases using config file.
 ## Features
 - [ ] **[YAML|JSON|TOML]** config files
 - [ ] **Nested** configurations
-- [ ] **Sudo**
+- [ ] **Sudo** permissions
 - [ ] **VARIABLES**
 - [ ] **Context**, folder specific command execution
 - [ ] **OS** specific commands
-- [ ] **Remote**
-- [ ] **Package**
-- [ ] **Autocomple**
+- [ ] **Remote** execution of commands
+- [ ] **Package**, universal mapping for your project's package manager
+- [ ] **Autocomplete**
 
 ## Examples
 
@@ -22,23 +22,24 @@ Modern way to manage command line aliases using config file.
 
 ## Development
 
-## Install for Development only
+### Installment
 ```
 git clone git@github.com:123code-il/cmd.git && ./cmd/bin/install
 ```
+### Structure
 
-### Commands and Flags
+## Commands and Flags
 
 ```
-cmd [command] [action] [PARAMETER] [--flag]
+cmd [command] [action] [VARIABLES] [--flag]
 
 # Commands
 add [name]
-remove [name]
+clean
 help --help
 install [name]
+uninstall [name]
 update [name]
-clean
 
 # Flags
 --extend
