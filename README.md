@@ -5,15 +5,15 @@
 Modern way to manage command line aliases using config file.
 
 ## Features
-- [] **[YAML|JSON|TOML]** config files
-- [] **Sudo**
-- [] **Variables**
-- [] **Nested** configurations
-- [] **Context**, folder specific command execution
-- [] **OS** specific commands
-- [] **Remote**
-- [] **Package**
-- [] **Autocomple**
+- [ ] **[YAML|JSON|TOML]** config files
+- [ ] **Nested** configurations
+- [ ] **Sudo**
+- [ ] **VARIABLES**
+- [ ] **Context**, folder specific command execution
+- [ ] **OS** specific commands
+- [ ] **Remote**
+- [ ] **Package**
+- [ ] **Autocomple**
 
 ## Examples
 
@@ -30,14 +30,15 @@ git clone git@github.com:123code-il/cmd.git && ./cmd/bin/install
 ### Commands and Flags
 
 ```
-cmd [command] [action] [-variable] [--flag]
+cmd [command] [action] [PARAMETER] [--flag]
 
-# Commangs
+# Commands
 add [name]
-delete [name]
+remove [name]
 help --help
-init [name]
 install [name]
+update [name]
+clean
 
 # Flags
 --extend
@@ -45,9 +46,9 @@ install [name]
 --package
 --path
 --sudo
---output
 --os
---show-command (dry?)
+--dry # show command
+--env
 
 --remote
 --netrc
