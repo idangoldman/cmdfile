@@ -5,16 +5,10 @@ import pathlib
 import sys
 import yaml
 
-CONFIG_FILE_PATH = os.path.join(
-  pathlib.Path(__file__).parent.parent.absolute(), 'cmd.yml'
-)
-
-def config():
-  with open(CONFIG_FILE_PATH) as file:
-    return yaml.full_load(file)
+from config import setup as config_setup
 
 def run():
-  cmds = config()
+  cmds = config_setup()
   args = sys.argv[1:]
   cmd = args.pop(0) if len(args) else ''
   command = args.pop(0) if len(args) else ''
