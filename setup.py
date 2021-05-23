@@ -4,7 +4,7 @@ setup(
     author = 'Idan Goldman',
     author_email = 'idan@123code.co',
     description = 'command line tool',
-    install_requires = ['pyyaml', 'fabric'],
+    install_requires = ['pyyaml', 'toml', 'deepmerge'],
     keywords = [''],
     license = 'MIT',
     name = 'cmd',
