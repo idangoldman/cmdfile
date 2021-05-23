@@ -14,6 +14,7 @@ Modern way to manage command line aliases using config file.
 - [ ] **Remote** execution of commands
 - [ ] **Package**, universal mapping for your project's package manager
 - [ ] **Autocomplete**
+- [ ] **Style and Testing**, tested code base and same writing style across the code base.
 
 ## Examples
 
