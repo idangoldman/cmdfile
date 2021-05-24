@@ -32,7 +32,7 @@ git clone git@github.com:123code-il/cmd.git && ./cmd/bin/install
 ## Commands and Flags
 
 ```
-cmd [command] [action] [VARIABLES] [--flag]
+cmd [command] [action] [VARIABLES] [--flags]
 
 # Commands
 add [name]
@@ -51,6 +51,7 @@ update [name]
 --os
 --dry # show command
 --env
+--global
 
 --remote
 --netrc

@@ -9,7 +9,7 @@ import json
 import toml
 from deepmerge import always_merger
 
-def find_cmd_file_paths(search_for = '^cmd\.(yml|json|toml)$', folder = '.'):
+def find_cmd_file_paths(search_for = '^cmd\.(yml|yaml|json|toml)$', folder = '.'):
   folder_path = os.path.abspath(folder)
   cmd_file = ''
   cmd_files = [file for file in os.listdir(folder_path) if re.match(search_for, file)]
