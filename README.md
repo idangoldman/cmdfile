@@ -2,15 +2,18 @@
 
 [A Cool GIF]()
 
-Modern way to manage command line aliases using config file.
+Opinionated way to manage command line aliases using a config file.
 
 ## Features
 - [ ] **[YAML|JSON|TOML]** config files
 - [ ] **Nested** configurations
 - [ ] **Sudo** permissions
 - [ ] **VARIABLES**
+- [ ] **Environment**
 - [ ] **Context**, folder specific command execution
+- [ ] **Logs**
 - [ ] **OS** specific commands
+- [ ] **Cron**
 - [ ] **Remote** execution of commands
 - [ ] **Package**, universal mapping for your project's package manager
 - [ ] **Autocomplete**
@@ -43,15 +46,16 @@ uninstall [name]
 update [name]
 
 # Flags
+--dry # show command
+--env
 --extend
+--global
 --list
+--os
 --package
 --path
 --sudo
---os
---dry # show command
---env
---global
+--verbos
 
 --remote
 --netrc
