@@ -1,0 +1,16 @@
+package_name: docker
+commands:
+  down: "docker-compose down"
+  load: "cmd responder down && cmd responder up && cmd responder log"
+  log: "docker-compose logs -f"
+  up-with-build: "docker-compose up --build -d"
+  up: "docker-compose up -d"
+
+  # load: "docker-compose down && docker-compose up -d && docker-compose logs -f"
+  # log: "docker-compose logs -f {{ CONTAINER_NAME }}"
+  # logs: "docker-compose logs -f"
+  # restart: "docker-compose down && docker-compose up -d"
+  # shell: "docker-compose exec -it {{ CONTAINER_NAME }} /bin/bash"
+  # start: "docker-compose up -d"
+  # stop: "docker-compose down"
+  # pull: "docker images | grep -v REPOSITORY | awk '{print $1\":\"$2}' | xargs -L1 docker pull"

@@ -1,0 +1,11 @@
+package_name: brew
+environment:
+  HOMEBREW_BREWFILE: "./Brewfile"
+commands:
+  install: "brew file install"
+  up:
+    - "brew update"
+    - "brew upgrade --greedy"
+    - "brew upgrade --cask --greedy"
+    - "brew cleanup"
+    - "brew doctor"

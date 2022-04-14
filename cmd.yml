@@ -27,6 +27,18 @@ mac:
 xcode:
   install: "xcode-select --install"
   version: "xcode-select --version"
+  reset: "sudo xcode-select --reset"
+  reinstall:
+    - "sudo rm -rf $(xcode-select --print-path)"
+    - "xcode-select --install"
+
+# ssh:
+#   add-remote-key:
+#     variables:
+#       SSH_KEY_PATH: ~/.ssh/id_rsa.pub
+#       REMOTE_HOST:
+#     command: ssh-copy-id -i {{ SSH_KEY_PATH }} {{ REMOTE_HOST }}
+# ssh-keygen -t ed25519 -C "your_email@example.com"
 
 hosts:
   commands:
@@ -39,30 +51,25 @@ wordpress:
     variables:
       WORDPRESS_PATH: ./
     command:
+      # sudo chown -R www-data:www-data ./wordpress
+      # sudo find ./wordpress -type d -exec chmod 775 {} \;
+      # sudo find ./wordpress -type f -exec chmod 664 {} \;
       - "chown -R www-data:www-data {{ WORDPRESS_PATH }}"
-      - "find {{ WORDPRESS_PATH }} -type d -exec chmod 775 {}"
-      - "find {{ WORDPRESS_PATH }} -type f -exec chmod 664 {}"
+      - "find {{ WORDPRESS_PATH }} -type d -exec chmod 775 {} \\;"
+      - "find {{ WORDPRESS_PATH }} -type f -exec chmod 664 {} \\;"
 
-brew:
+frontend:
   package: brewfile
   environment:
     HOMEBREW_BREWFILE: "./Brewfile"
   commands:
-    install: "brew file install"
+    install: "brew bundle ~/.Brefile"
     up:
       - "brew update"
-      - "brew upgrade --greedy"
       - "brew upgrade --cask --greedy"
       - "brew cleanup"
       - "brew doctor"
-
-apt:
-  sudo: true
-  commands:
-    up:
-      - "apt update"
-      - "apt upgrade -y"
-      - "apt autoremove -y"
+      - "mas upgrade"
 
 find:
   commands:
@@ -70,28 +77,15 @@ find:
     where: "find ./ -iname {{ NAME }}"
 
 git:
-  init:
-    variables:
-      commit_message: "Initial commit."
-      remote_repository: ""
-    command:
-      - "rm -fr .git"
-      - "git init"
-      - "git add ."
-      - "git commit -m {{ COMMIT_MESSAGE }}"
-      - "git remote add origin {{ REMOTE_REPOSITORY }}"
-      - "git push origin master --set-upstream --force"
-  flush:
-    command: "git rm -r --cached . && git add . && git status"
-    help: "Refresh your git repository, and clean those deleted files."
-  retag: "git push --delete origin {{ TAG_NAME }} && git tag -d {{ TAG_NAME }} && git tag {{ TAG_NAME }} && git push --tags"
-  stash: "git add . && git stash"
-  commit:
-    init: "git add . && git commit -m \"Initial commit.\""
-    all: "git add . && git commit -m \"{{ COMMIT_MESSAGE }}\""
   rollback: "git reset --mixed HEAD~1"
-  remove: "git branch -D {{ BRANCH_NAME }}"
-  delete: "git branch -D {{ BRANCH_NAME }} && git push {{ REMOTE_NAME }} :{{ BRANCH_NAME }}"
+  heroku:
+    locals:
+      APP_NAME: nuxt
+    command:
+    - "git add ."
+    - "git commit -m \"deploy heroku {{ APP_NAME }} $(date +'%Y%m%d%H%M%S')\""
+    - "git push heroku master:main"
+
 
 zsh:
   path: "$HOME"
@@ -103,34 +97,16 @@ zsh:
 docker:
   package: docker
   commands:
+    down: "cmd docker down"
     load: "docker-compose down && docker-compose up -d && docker-compose logs -f"
     log: "docker-compose logs -f {{ CONTAINER_NAME }}"
     logs: "docker-compose logs -f"
+    pull: "docker images | grep -v REPOSITORY | awk '{print $1\":\"$2}' | xargs -L1 docker pull"
     restart: "docker-compose down && docker-compose up -d"
     shell: "docker-compose exec -it {{ CONTAINER_NAME }} /bin/bash"
     start: "docker-compose up -d"
     stop: "docker-compose down"
-    pull: "docker images | grep -v REPOSITORY | awk '{print $1\":\"$2}' | xargs -L1 docker pull"
-
-node:
-  package: yarn
-  commands:
-    add: "yarn add {{ PACKAGE_NAME }}"
-    clean: "rm -fr node_modules"
-    dev-add: "yarn add --dev {{ PACKAGE_NAME }}"
-    publish: "npm publish --access=public"
-    load: "yarn clean && yarn install"
-    remove: "yarn remove {{ PACKAGE_NAME }}"
-    test: "jest --config jest.config.json"
-    test:coverage: "jest --config jest.config.json --coverage"
-    test:coverage:open: "open .coverage/lcov-report/index.html"
-    test:update:snapshot: "jest --config jest.config.json --updateSnapshot"
-    test:watch: "jest --config jest.config.json --watchAll"
-
-jekyll:
-  clean: "bundle exec jekyll clean && bundle exec jekyll doctor"
-  install: "bundle install --path vendor/bundle"
-  kill: "kill $(ps aux | grep '[j]ekyll' | awk '{print $2}')"
+    up: "cmd docker start"
 
 web:
   simple: "python -m SimpleHTTPServer 8000"
