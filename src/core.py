@@ -1,3 +1,4 @@
+import logging
 import os
 import sys
 
@@ -18,23 +19,36 @@ def run():
         command = ""
 
     if cmd in cmds.keys():
-        commands = (
-            cmds[cmd]["commands"] if "commands" in cmds[cmd].keys() else cmds[cmd]
-        )
+        actions = []
 
-        if command in commands.keys():
-            actions = (
-                commands[command]
-                if isinstance(commands[command], list)
-                else [commands[command]]
-            )
+        if isinstance(cmds[cmd], dict):
+            if (
+                "commands" in cmds[cmd].keys()
+                and command in cmds[cmd]["commands"].keys()
+            ):
+                actions = (
+                    cmds[cmd]["commands"][command]
+                    if isinstance(cmds[cmd]["commands"][command], list)
+                    else [cmds[cmd]["commands"][command]]
+                )
 
-            for action in actions:
-                # print('#', action)
-                os.system(action)
-
+            elif "command" in cmds[cmd].keys():
+                actions = (
+                    cmds[cmd]["command"]
+                    if isinstance(cmds[cmd]["command"], list)
+                    else [cmds[cmd]["command"]]
+                )
+        elif isinstance(cmds[cmd], str):
+            actions = [cmds[cmd]]
         else:
-            print("action not found")
+            actions = cmds[cmd]
+
+        for action in actions or []:
+            # logging.debug('#', action)
+            os.system(action)
+
+        if not actions:
+            logging.error("action not found.")
 
     else:
-        print("command not found.")
+        logging.error("command not found.")

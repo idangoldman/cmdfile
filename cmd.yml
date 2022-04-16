@@ -1,3 +1,16 @@
+format: "pipenv run black src tests bin/cmd"
+lint: "pipenv run pylint src tests bin/cmd"
+both:
+  - "pipenv run black src tests bin/cmd"
+  - "pipenv run pylint src tests bin/cmd"
+init:
+  - "brew install pipenv pyenv"
+  - "pyenv install 3.10.3"
+  - "pipenv install --dev"
+  - "pipenv run ./bin/install"
+reinstall: "pipenv run ./bin/install"
+uninstall: "pipenv run ./bin/uninstall"
+
 sqlite:
   variables:
     SCHEMA_FILE: schema.db
