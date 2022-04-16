@@ -58,7 +58,7 @@ wordpress:
       - "find {{ WORDPRESS_PATH }} -type d -exec chmod 775 {} \\;"
       - "find {{ WORDPRESS_PATH }} -type f -exec chmod 664 {} \\;"
 
-frontend:
+brew:
   package: brewfile
   environment:
     HOMEBREW_BREWFILE: "./Brewfile"
@@ -85,7 +85,6 @@ git:
     - "git add ."
     - "git commit -m \"deploy heroku {{ APP_NAME }} $(date +'%Y%m%d%H%M%S')\""
     - "git push heroku master:main"
-
 
 zsh:
   path: "$HOME"

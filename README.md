@@ -17,7 +17,7 @@ Opinionated way to manage command line aliases using a config file.
 - [ ] **Remote** execution of commands
 - [ ] **Package**, universal mapping for your project's package manager
 - [ ] **Autocomplete**
-- [ ] **Style and Testing**, tested code base and same writing style across the code base.
+- [ ] **Style and Testing**, tested codebase and same writing style across the codebase.
 
 ## Examples
 
@@ -25,10 +25,12 @@ Opinionated way to manage command line aliases using a config file.
 ## Background
 
 ## Development
-
+brew install pipenv pyenv && pyenv install 3.10.3 && pipenv install --dev && pipenv run ./bin/install
+```
 ### Installment
 ```
 git clone git@github.com:123code-il/cmd.git && ./cmd/bin/install
+#brew install cmd_line
 ```
 ### Structure
 

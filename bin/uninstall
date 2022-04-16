@@ -1,3 +1,5 @@
 #!/bin/bash
 
-pip3 uninstall cmd
+if pip3 show cmd &> /dev/null; then
+  pip3 uninstall cmd
+fi
