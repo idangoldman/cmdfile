@@ -1,7 +1,7 @@
 import os
 import sys
 
-from config import setup as config_setup
+from src.config import setup as config_setup
 
 
 def run():
