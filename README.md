@@ -2,19 +2,22 @@
 
 [A Cool GIF]()
 
-Modern way to manage command line aliases using config file.
+Opinionated way to manage command line aliases using a config file.
 
 ## Features
 - [ ] **[YAML|JSON|TOML]** config files
 - [ ] **Nested** configurations
 - [ ] **Sudo** permissions
 - [ ] **VARIABLES**
+- [ ] **Environment**
 - [ ] **Context**, folder specific command execution
+- [ ] **Logs**
 - [ ] **OS** specific commands
+- [ ] **Cron**
 - [ ] **Remote** execution of commands
 - [ ] **Package**, universal mapping for your project's package manager
 - [ ] **Autocomplete**
-- [ ] **Style and Testing**, tested code base and same writing style across the code base.
+- [ ] **Style and Testing**, tested codebase and same writing style across the codebase.
 
 ## Examples
 
@@ -22,17 +25,22 @@ Modern way to manage command line aliases using config file.
 ## Background
 
 ## Development
+brew install pipenv pyenv && pyenv install 3.10.3 && pipenv install --dev && pipenv run ./bin/install
 
+pipenv run black src tests bin/cmd
+pipenv run pylint src tests bin/cmd
+```
 ### Installment
 ```
 git clone git@github.com:123code-il/cmd.git && ./cmd/bin/install
+#brew install cmd_line
 ```
 ### Structure
 
 ## Commands and Flags
 
 ```
-cmd [command] [action] [VARIABLES] [--flag]
+cmd [command] [action] [VARIABLES] [--flags]
 
 # Commands
 add [name]
@@ -43,14 +51,16 @@ uninstall [name]
 update [name]
 
 # Flags
+--dry # show command
+--env
 --extend
+--global
 --list
+--os
 --package
 --path
 --sudo
---os
---dry # show command
---env
+--verbos
 
 --remote
 --netrc

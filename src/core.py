@@ -1,43 +1,40 @@
-#!/usr/bin/env python3
-
 import os
-import pathlib
 import sys
-import yaml
 
-CONFIG_FILE_PATH = os.path.join(
-  pathlib.Path(__file__).parent.parent.absolute(), 'cmd.yml'
-)
+from src.config import setup as config_setup
 
-def config():
-  with open(CONFIG_FILE_PATH) as file:
-    return yaml.full_load(file)
 
 def run():
-  cmds = config()
-  args = sys.argv[1:]
-  cmd = args.pop(0) if len(args) else ''
-  command = args.pop(0) if len(args) else ''
+    cmds = config_setup()
+    args = sys.argv[1:]
+    cmd = args.pop(0) if args else ""
+    command = args.pop(0) if args else ""
 
-  # os.system("uptime")
-  # print(cmd, command, args)
+    # os.system("uptime")
+    # print(cmd, command, args)
 
-  if command.startswith('-', 0, 1):
-    args.insert(0, command)
-    command = ''
+    if command.startswith("-", 0, 1):
+        args.insert(0, command)
+        command = ""
 
-  if cmd in cmds.keys():
-    commands = cmds[cmd]['commands'] if 'commands' in cmds[cmd].keys() else cmds[cmd]
+    if cmd in cmds.keys():
+        commands = (
+            cmds[cmd]["commands"] if "commands" in cmds[cmd].keys() else cmds[cmd]
+        )
 
-    if command in commands.keys():
-      actions = commands[command] if type(commands[command]) is list else [commands[command]]
+        if command in commands.keys():
+            actions = (
+                commands[command]
+                if isinstance(commands[command], list)
+                else [commands[command]]
+            )
 
-      for action in actions:
-        # print('#', action)
-        os.system(action)
+            for action in actions:
+                # print('#', action)
+                os.system(action)
+
+        else:
+            print("action not found")
 
     else:
-      print("action not found")
-
-  else:
-    print("command not found.")
+        print("command not found.")

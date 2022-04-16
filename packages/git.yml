@@ -1,0 +1,27 @@
+package_name: git
+commands:
+  init:
+    variables:
+      commit_message: "Initial commit."
+      remote_repository: ""
+    command:
+      - "rm -fr .git"
+      - "git init"
+      - "git add ."
+      - "git commit -m {{ COMMIT_MESSAGE }}"
+      - "git remote add origin {{ REMOTE_REPOSITORY }}"
+      - "git push origin master --set-upstream --force"
+  flush:
+    command: "git rm -r --cached . && git add . && git status"
+    help: "Refresh your git repository, and clean those deleted files."
+  retag: "git push --delete origin {{ TAG_NAME }} && git tag -d {{ TAG_NAME }} && git tag {{ TAG_NAME }} && git push --tags"
+  stash: "git add . && git stash"
+  commit:
+    init: "git add . && git commit -m \"Initial commit.\""
+    all: "git add . && git commit -m \"{{ COMMIT_MESSAGE }}\""
+  rollback:
+    variables:
+      STEPS: 1
+    command: "git reset --mixed HEAD~{{ STEPS }}"
+  remove: "git branch -D {{ BRANCH_NAME }}"
+  delete: "git branch -D {{ BRANCH_NAME }} && git push {{ REMOTE_NAME }} :{{ BRANCH_NAME }}"
