@@ -25,6 +25,7 @@ Opinionated way to manage command line aliases using a config file.
 ## Background
 
 ## Development
+```
 brew install pipenv pyenv && pyenv install 3.10.3 && pipenv install --dev && pipenv run ./bin/install
 
 pipenv run black src tests bin/cmd
