@@ -1,4 +1,4 @@
 #!/bin/bash
 
 ./bin/uninstall
-pip3 install -e .
+python3 -m pip3 install -e .

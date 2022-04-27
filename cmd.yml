@@ -1,8 +1,6 @@
-format: "pipenv run black src tests bin/cmd"
-lint: "pipenv run pylint src tests bin/cmd"
-both:
-  - "pipenv run black src tests bin/cmd"
-  - "pipenv run pylint src tests bin/cmd"
+format: "pipenv run black src tests bin/cmd setup.py"
+lint: "pipenv run pylint src tests bin/cmd setup.py"
+both: "cmd format && cmd lint"
 init:
   - "brew install pipenv pyenv"
   - "pyenv install 3.10.3"
