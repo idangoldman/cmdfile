@@ -1,12 +1,19 @@
 {
   "name": "cmd",
   "version": "0.0.1",
-  "description": "Conventions configuration way to manage CLI commands alias.",
+  "description": "Manage CLI command aliases by a config file.",
   "main": "index.js",
   "repository": "https://github.com/idangoldman/cmd",
   "author": "Idan Goldman <idan@123code.co>",
   "license": "MIT",
+  "scripts": {
+    "test": "jasmine",
+    "lint": "eslint --fix src/**/*.js"
+  },
   "devDependencies": {
+    "eslint": "^8.34.0",
+    "eslint-plugin-jasmine": "^4.1.3",
+    "jasmine": "^4.5.0",
     "zx": "^7.1.1"
   }
 }
