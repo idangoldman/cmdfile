@@ -1,0 +1,12 @@
+{
+  "name": "cmd",
+  "version": "0.0.1",
+  "description": "Modern way to manage CLI commands alias.",
+  "main": "index.js",
+  "repository": "https://github.com/idangoldman/cmd",
+  "author": "Idan Goldman <idan@123code.co>",
+  "license": "MIT",
+  "devDependencies": {
+    "zx": "^7.1.1"
+  }
+}
