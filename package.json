@@ -1,7 +1,7 @@
 {
   "name": "cmd",
   "version": "0.0.1",
-  "description": "Modern way to manage CLI commands alias.",
+  "description": "Conventions configuration way to manage CLI commands alias.",
   "main": "index.js",
   "repository": "https://github.com/idangoldman/cmd",
   "author": "Idan Goldman <idan@123code.co>",
