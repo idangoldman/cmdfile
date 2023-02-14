@@ -6,8 +6,9 @@
   },
   "extends": [
     "eslint:recommended",
+    "plugin:security/recommended",
+    "plugin:node/recommended-module",
     "plugin:jasmine/recommended",
-    "standard"
   ],
   "plugins": [
     "jasmine"
