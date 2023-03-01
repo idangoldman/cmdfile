@@ -10,14 +10,20 @@
     "plugin:editorconfig/all",
     "plugin:import/recommended",
     "plugin:jest/recommended",
-    "plugin:json/standard",
+    "plugin:json/recommended",
     "plugin:node/recommended-module",
     "plugin:prettier/recommended",
     "plugin:security-node/recommended",
     "plugin:toml/standard",
     "plugin:yml/standard"
   ],
-  "plugins": ["i18n", "prettier", "regex", "unused-imports", "sort-keys-fix"],
+  "plugins": [
+    "hexagonal-architecture",
+    "i18n",
+    "prettier",
+    "regex",
+    "unused-imports"
+  ],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
