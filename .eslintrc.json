@@ -1,20 +1,23 @@
 {
   "env": {
-    "node": true,
+    "__dirname": true,
     "es2021": true,
-    "jest": true,
-    "shelljs": true,
-    "__dirname": true
+    "jest/globals": true,
+    "node": true
   },
   "extends": [
     "eslint:recommended",
     "plugin:editorconfig/all",
+    "plugin:import/recommended",
+    "plugin:jest/recommended",
+    "plugin:json/standard",
     "plugin:node/recommended-module",
     "plugin:prettier/recommended",
-    "plugin:security/recommended"
+    "plugin:security-node/recommended",
+    "plugin:toml/standard",
+    "plugin:yml/standard"
   ],
-  "plugins": ["editorconfig", "prettier"],
-  "overrides": [],
+  "plugins": ["i18n", "prettier", "regex", "unused-imports", "sort-keys-fix"],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
