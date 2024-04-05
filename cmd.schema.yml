@@ -1,0 +1,39 @@
+type: object
+properties:
+  version:
+    type: string
+    propertyPattern: "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+
+  commands:
+    type: object
+    additionalProperties:
+      type: object
+      properties:
+        sequence:
+          type: string
+          enum: [parallel, series, pipe, semi, and]
+
+        command:
+          type: string
+
+        commands:
+          type: array
+          items:
+            type: string
+
+        flags:
+          type: array
+          items:
+            oneOf:
+              - type: string
+              - type: object
+                additionalProperties: true
+
+        locals:
+          type: object
+          additionalProperties: true
+required:
+  - version
+  - commands
+
+additionalProperties: false

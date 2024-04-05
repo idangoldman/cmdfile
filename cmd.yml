@@ -1,0 +1,44 @@
+# cmd install
+install:
+  sequence: parallel # series, parallel, pipe
+
+  commands:
+    - pnpm install
+    - bundle install
+
+# cmd add gulp gulp-cli
+add: pnpm add $args
+
+# cmd clean
+clean:
+  command: rm $flags $paths
+
+  flags:
+    - force
+    - recursive
+    - verbose
+
+  locals:
+    paths:
+      - node_modules
+      - tmp
+
+# cmd gulp
+gulp:
+  command: node $flags $gulp_bin $args
+
+  locals:
+    gulp_bin:     ./node_modules/gulp/bin/gulp
+    gulp_file:    ./config/gulpfile.mjs
+    node_loaders: ./utils/loaders/register.mjs
+
+  flags:
+    - gulpfile: $gulp_file
+    - import: $node_loaders
+    - trace-warnings
+
+# cmd build
+build: cmd gulp build
+
+# cmd tasks
+tasks: cmd gulp --tasks

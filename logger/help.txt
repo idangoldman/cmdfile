@@ -1,0 +1,14 @@
+Usage:
+  log_message [-v | --verbose] [LOG_LEVEL] MESSAGE
+
+Options:
+  -v, --verbose    Print the log message to the CLI regardless of the log level.
+  -h, --help       Show this help message and exit.
+
+LOG_LEVEL:
+  The log level of the message.
+  0: none, 1: error, 2: warning, 3: info, 4: debug.
+  Default: 3 (info)
+
+MESSAGE:
+  The message to log.
