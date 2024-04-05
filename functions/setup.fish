@@ -59,6 +59,7 @@ end
 
 function cmdfile_check_for_dependencies
     set -l dependencies (yq --version)
+    set -l dependencies (jq --version)
     set -a dependencies (gzip --version)
 
     for dep in $dependencies
