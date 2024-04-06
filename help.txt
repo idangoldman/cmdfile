@@ -1,5 +1,5 @@
 Usage:
-  cmd [command...] [option=...] [VARIABLE=...] [--flags=?...]
+  cmd [alias...] [option=...] [VARIABLE=...] [--flags=?...]
 
 Options (flags):
   --sudo        Use sudo
@@ -11,7 +11,7 @@ Options (flags):
   -i, --info    Show info
   -v, --version Show version
 
-COMMANDs:
+ALIASes:
 
 
 OPTIONs:

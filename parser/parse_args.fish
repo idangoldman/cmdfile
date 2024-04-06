@@ -1,6 +1,6 @@
 function cmdfile_parse_args --description 'Parse arguments into a JSON object using yq'
-    set -l arguments "{actions: [], options: {}, variables: {}, flags: {}}"
-    set -l found_non_action 0
+    set -l arguments "{aliases: [], options: {}, variables: {}, flags: {}}"
+    set -l found_non_alias 0
 
     for argument in $argv
         set -l parsed_argument (cmdfile_parse_arg $argument)
@@ -11,17 +11,17 @@ function cmdfile_parse_args --description 'Parse arguments into a JSON object us
 
         echo $type $key $value
 
-        if test $type = actions -a $found_non_action -eq 1
-            echo "Error: actions must be defined before any other option or variable."
+        if test $type = aliases -a $found_non_alias -eq 1
+            echo "Error: aliases must be defined before any other option or variable."
             return 1
         end
 
         switch $type
-            case actions
-                set arguments (echo $arguments | yq e ".actions += [\"$key\"]" -)
+            case aliases
+                set arguments (echo $arguments | yq e ".aliases += [\"$key\"]" -)
             case '*'
                 if test $type != flags
-                    set found_non_action 1
+                    set found_non_alias 1
                 end
 
                 set arguments (echo $arguments | yq e ".$type.$key = \"$value\"" -)

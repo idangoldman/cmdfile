@@ -15,8 +15,8 @@ function cmdfile_parse_arg --description 'Parse command argument into type, key,
         return 1
     end
 
-    # set default type to actions
-    set -l type actions
+    # set default type to aliases
+    set -l type aliases
 
     # patch for dash-only value in flags
     set -l flag_key false
