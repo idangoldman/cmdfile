@@ -1,0 +1,20 @@
+Usage:
+  cmd [action...] [option=...] [VARIABLE=...] [--flags=?...]
+
+Options (flags):
+  --sudo        Use sudo
+  -c, --cwd     Set working directory
+  -d, --debug   Show debug info
+  -e, --env     Set environment
+  -f, --file    Set file
+  -h, --help    Show this help message
+  -i, --info    Show info
+  -v, --version Show version
+
+ACTIONs:
+
+
+OPTIONs:
+
+
+VARIABLEs:
