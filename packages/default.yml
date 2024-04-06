@@ -1,0 +1,6 @@
+node_version: 18.14.0
+root_command: cmd
+
+aliases:
+  # ...???
+  cmd

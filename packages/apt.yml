@@ -1,0 +1,7 @@
+package_name: apt
+sudo: true
+commands:
+  up:
+    - "apt update"
+    - "apt upgrade -y"
+    - "apt autoremove -y"

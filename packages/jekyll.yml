@@ -1,0 +1,5 @@
+package_name: jekyll
+commands:
+  clean: "bundle exec jekyll clean && bundle exec jekyll doctor"
+  install: "bundle install --path vendor/bundle"
+  kill: "kill $(ps aux | grep '[j]ekyll' | awk '{print $2}')"

@@ -1,0 +1,9 @@
+package_name: yarn
+variables:
+  PACKAGE_NAME:
+commands:
+  add-dev: "yarn add --dev {{ PACKAGE_NAME }}"
+  add: "yarn add {{ PACKAGE_NAME }}"
+  clean: "rm -fr node_modules yarn.lock package-lock.json"
+  reinstall: "yarn clean && yarn install"
+  remove: "yarn remove {{ PACKAGE_NAME }}"

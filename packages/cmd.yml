@@ -1,0 +1,124 @@
+format: "pipenv run black src tests bin/cmd setup.py"
+lint: "pipenv run pylint src tests bin/cmd setup.py"
+both: "cmd format && cmd lint"
+init:
+  - "brew install pipenv pyenv"
+  - "pyenv install 3.10.3"
+  - "pipenv install --dev"
+  - "pipenv run ./bin/install"
+reinstall: "pipenv run ./bin/install"
+uninstall: "pipenv run ./bin/uninstall"
+
+sqlite:
+  variables:
+    SCHEMA_FILE: schema.db
+    DUMP_FILE: $(date +'%Y%m%d%H%M%S')_dump.db
+    DB_FILE: ""
+  commands:
+    schema: "sqlite3 {{ DB_FILE }} '.schema' > {{ SCHEMA_FILE }}"
+    dump: "sqlite3 {{ DB_FILE }} '.dump' > {{ DUMP_FILE }}"
+
+kill: "kill $(ps aux | grep {{ PROCESS_NAME }} | awk '{print $2}')"
+
+net:
+  ping: "ping -c 5 google.com"
+  ip: "curl -s ipinfo.io/ip | grep -E \"\d{1}|\d{2}|\d{3}\""
+  lan-ip: "ipconfig getifaddr en0"
+
+mac:
+  sudo: true
+  commands:
+    uptime: "uptime"
+    dns-flush: "killall -HUP mDNSResponder"
+    restart: "shutdown -r now"
+    shutdown: "shutdown -h +60"
+    update: "softwareupdate -l"
+    upgrade: "softwareupdate -ia"
+
+xcode:
+  install: "xcode-select --install"
+  version: "xcode-select --version"
+  reset: "sudo xcode-select --reset"
+  reinstall:
+    - "sudo rm -rf $(xcode-select --print-path)"
+    - "xcode-select --install"
+
+# ssh:
+#   add-remote-key:
+#     variables:
+#       SSH_KEY_PATH: ~/.ssh/id_rsa.pub
+#       REMOTE_HOST:
+#     command: ssh-copy-id -i {{ SSH_KEY_PATH }} {{ REMOTE_HOST }}
+# ssh-keygen -t ed25519 -C "your_email@example.com"
+
+hosts:
+  commands:
+    edit: "sudo vim /etc/hosts"
+    view: "less /etc/hosts"
+
+wordpress:
+  permissions:
+    sudo: true
+    variables:
+      WORDPRESS_PATH: ./
+    command:
+      # sudo chown -R www-data:www-data ./wordpress
+      # sudo find ./wordpress -type d -exec chmod 775 {} \;
+      # sudo find ./wordpress -type f -exec chmod 664 {} \;
+      - "chown -R www-data:www-data {{ WORDPRESS_PATH }}"
+      - "find {{ WORDPRESS_PATH }} -type d -exec chmod 775 {} \\;"
+      - "find {{ WORDPRESS_PATH }} -type f -exec chmod 664 {} \\;"
+
+brew:
+  package: brewfile
+  environment:
+    HOMEBREW_BREWFILE: "./Brewfile"
+  commands:
+    install: "brew bundle ~/.Brefile"
+    up:
+      - "brew update"
+      - "brew upgrade --cask --greedy"
+      - "brew cleanup"
+      - "brew doctor"
+      - "mas upgrade"
+
+find:
+  commands:
+    all: "find / -iname {{ NAME }}"
+    where: "find ./ -iname {{ NAME }}"
+
+git:
+  rollback: "git reset --mixed HEAD~1"
+  heroku:
+    locals:
+      APP_NAME: nuxt
+    command:
+      - "git add ."
+      - "git commit -m \"deploy heroku {{ APP_NAME }} $(date +'%Y%m%d%H%M%S')\""
+      - "git push heroku master:main"
+  stash: "git add . && git stash"
+
+zsh:
+  path: "$HOME"
+  commands:
+    edit: "vim ~/.zshrc"
+    reload: "source ~/.zshrc"
+    restart: "exec \"$SHELL\""
+
+docker:
+  package: docker
+  commands:
+    down: "cmd docker down"
+    load: "docker-compose down && docker-compose up -d && docker-compose logs -f"
+    log: "docker-compose logs -f {{ CONTAINER_NAME }}"
+    logs: "docker-compose logs -f"
+    pull: "docker images | grep -v REPOSITORY | awk '{print $1\":\"$2}' | xargs -L1 docker pull"
+    restart: "docker-compose down && docker-compose up -d"
+    shell: "docker-compose exec -it {{ CONTAINER_NAME }} /bin/bash"
+    start: "docker-compose up -d"
+    stop: "docker-compose down"
+    up: "cmd docker start"
+
+web:
+  simple: "python -m SimpleHTTPServer 8000"
+  mkcert: "mkcert -cert-file ./certs/{{ DOMAIN_NAME }}.crt -key-file ./certs/{{ DOMAIN_NAME }}.key \"{{ DOMAIN_NAME }}\" \"*.{{ DOMAIN_NAME }}\""

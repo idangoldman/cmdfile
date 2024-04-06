@@ -1,0 +1,70 @@
+type: object
+
+properties:
+  version:
+    type: string
+  envfile:
+    type: string
+  package_name:
+    type: string
+    pattern: "^[a-zA-Z_]+$"
+  root_command:
+    type: string
+    pattern: "^[a-zA-Z_]+$"
+
+required:
+  - version
+
+patternProperties:
+  "^[a-zA-Z_.-]+$":
+    $ref: '#/definitions/mainProperties'
+
+additionalProperties: false
+
+definitions:
+  mainProperties:
+    type: object
+    properties:
+      cwd:
+        type: string
+      description:
+        type: string
+      envfile:
+        type: string
+      example:
+        type: string
+      package_name:
+        type: string
+      pipe:
+        type: boolean
+      sudo:
+        type: boolean
+      flags:
+        oneOf:
+          - $ref: '#/definitions/complexProperties'
+          - type: array
+            items:
+              type: string
+      locals:
+        $ref: '#/definitions/complexProperties'
+      variables:
+        $ref: '#/definitions/complexProperties'
+      options:
+        $ref: '#/definitions/complexProperties'
+      commands:
+        type: array
+        items:
+          type: string
+      actions:
+        type: object
+        patternProperties:
+          "^[a-zA-Z0-9._-]+$":
+            $ref: '#/definitions/mainProperties'
+
+  complexProperties:
+    type: object
+    additionalProperties:
+      oneOf:
+        - type: string
+        - type: boolean
+        - type: number
