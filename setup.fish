@@ -4,7 +4,8 @@ function cmdfile_setup
     set -gx CMDFILE_CONFIG_NAME "cmd.yml"
     set -gx CMDFILE_CONFIG_NAMES "cmd.yml" "cmdfile.yml" "cmd.yaml" "cmdfile.yaml"
     set -gx CMDFILE_VERSION "0.0.1"
-    set -gx CMDFILE_USER_DIR (cmdfile_config_dir)
+    set -gx CMDFILE_USER_DIR (cmdfile_config_user_dir)
+    set -gx CMDFILE_CONFIG_PATH (cmdfile_config_find)
 end
 
 function cmdfile_check_for_dependencies
@@ -23,7 +24,7 @@ function cmdfile_check_for_dependencies
     end
 end
 
-function cmdfile_config_dir
+function cmdfile_config_user_dir
     set -l basename cmdfile
     set -l user_dir "~/.$basename"
 
@@ -41,4 +42,26 @@ function cmdfile_config_dir
     end
 
     echo $user_dir
+end
+
+function cmdfile_config_find
+    set -l found_paths
+    set -l current_dir (pwd -P)
+
+    if test -f "$current_dir/$CMDFILE_CONFIG_NAME"
+        set -a found_paths "$current_dir/$CMDFILE_CONFIG_NAME"
+    end
+
+    if test -f "$CMDFILE_USER_DIR/$CMDFILE_CONFIG_NAME"
+        set -a found_paths "$CMDFILE_USER_DIR/$CMDFILE_CONFIG_NAME"
+    end
+
+    if test (count $found_paths) -eq 0
+      echo "No configuration file found."
+      exit 1
+    else if test (count $found_paths) -gt 1
+      echo $found_paths[1]
+    else
+      echo $found_paths
+    end
 end
