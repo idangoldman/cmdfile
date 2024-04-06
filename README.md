@@ -76,3 +76,12 @@ update [name]
 ```
 
 ## License
+```
+# init one?
+python -m pip install .
+https://docs.python.org/3/distutils/introduction.html
+https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/
+https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
+https://setuptools.pypa.io/en/latest/setuptools.html
+https://stackoverflow.com/questions/59997065/pip-python-normal-site-packages-is-not-writeable
+```

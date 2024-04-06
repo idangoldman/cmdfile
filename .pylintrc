@@ -1,4 +1,6 @@
 [MASTER]
-disable=
-  C0114,
-  C0116
+disable = C0114, C0115, C0116
+
+[FORMAT]
+indent-string = '  '
+indent-after-paren = 2
