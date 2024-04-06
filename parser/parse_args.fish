@@ -9,8 +9,6 @@ function cmdfile_parse_args --description 'Parse arguments into a JSON object us
         set -l key (echo $parsed_argument | awk '{print $2}')
         set -l value (echo $parsed_argument | awk '{print $3}')
 
-        echo $type $key $value
-
         if test $type = aliases -a $found_non_alias -eq 1
             echo "Error: aliases must be defined before any other option or variable."
             return 1

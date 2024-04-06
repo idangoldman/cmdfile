@@ -1,7 +1,9 @@
 #!/usr/bin/env fish
 
-source parse_args.fish
-source parse_arg.fish
+for file in ./parse_*.fish
+    echo "Loading $file"
+    source $file
+end
 
 # PARSE ARG EXAMPLE TESTS
 cmdfile_parse_arg --flag1=value1
