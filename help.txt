@@ -1,20 +1,22 @@
 Usage:
-  cmd [alias...] [option=...] [VARIABLE=...] [--flags=?...]
+  cmd alias... [arguments...] [option=...] [VARIABLE=...] [--flags=?...]
 
 Options (flags):
-  --sudo        Use sudo
-  -c, --cwd     Set working directory
-  -d, --debug   Show debug info
-  -e, --env     Set environment
-  -f, --file    Set file
-  -h, --help    Show this help message
-  -i, --info    Show info
-  -v, --version Show version
+  --sudo         Use sudo
+  -c, --cwd      Set working directory
+  -d, --debug    Show debug logs (default: false)
+  -D, --dry-run  Show output command(s) without executing
+  -e, --env      Set environment variable from a `.env` file path
+  -f, --file     Set `cmd.yml` configuration file path
+  -h, --help     Show this help message
+  -i, --info     Show info about the alias
+  -l, --list     List all available aliases
+  -v, --version  Show version
 
 ALIASes:
 
+ARGUMENTs:
 
 OPTIONs:
-
 
 VARIABLEs:

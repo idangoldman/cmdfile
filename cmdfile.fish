@@ -14,12 +14,12 @@ end
 function cmdfile -d "Command line tool"
     set -l arguments (cmdfile_parse_args $argv)
 
-    if echo $arguments | yq e '.flags | has("help")' - | string match -q true
+    if echo $arguments | yq e '.flags | (has("h") or has("help"))' - | string match -q true
         cat $CMDFILE_HELP_PATH
         return 0
     end
 
-    if echo $arguments | yq e '.flags | has("version")' - | string match -q true
+    if echo $arguments | yq e '.flags | (has("v") or has("version"))' - | string match -q true
         echo $CMDFILE_VERSION
         return 0
     end
