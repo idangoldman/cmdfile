@@ -1,6 +1,9 @@
 #!/usr/bin/env fish
 
-source setup.fish
+for file in ../functions/*.fish
+    echo "Loading $file"
+    source $file
+end
 echo "SETUP => Loaded"
 
 # cmdfile_check_for_dependencies

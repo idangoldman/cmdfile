@@ -6,7 +6,7 @@ set -gx CMDFILE_HELP_PATH (realpath (dirname (status --current-filename))/help.t
 set -gx CMDFILE_CONFIG_PATH (realpath (dirname (status --current-filename))/cmd.yml)
 
 # Load all functions for cmdfile to work
-for file in parser/parse_*.fish
+for file in functions/parser/*.fish
     echo "Loading $file"
     source $file
 end

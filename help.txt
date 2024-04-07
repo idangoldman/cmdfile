@@ -1,7 +1,7 @@
 Usage:
-  cmd alias... [arguments...] [option=...] [VARIABLE=...] [--flags=?...]
+  cmd [--flags[=value]...] <alias> [argument...] [option=value...] [VARIABLE=value...]
 
-Options (flags):
+FLAGS:
   --sudo         Use sudo
   -c, --cwd      Set working directory
   -d, --debug    Show debug logs (default: false)
@@ -13,10 +13,10 @@ Options (flags):
   -l, --list     List all available aliases
   -v, --version  Show version
 
-ALIASes:
+ALIAS:
 
-ARGUMENTs:
+ARGUMENT:
 
-OPTIONs:
+OPTION:
 
-VARIABLEs:
+VARIABLE:

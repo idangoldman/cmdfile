@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-for file in ./parse_*.fish
+for file in ../functions/parser/*.fish
     echo "Loading $file"
     source $file
 end
