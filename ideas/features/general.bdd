@@ -1,0 +1,16 @@
+Given '`cmd` command exists' $command
+  set --function cmdfile $command
+  set --local actual (cat $CMDFILE_PATH)
+  set --local expected (which $cmdfile)
+  test $expected = $actual
+
+When 'developer types `(.+)` into the console' $expression_to_run
+  set --function actual $expression_to_run
+
+Then 'the contents of the help file would be prompt'
+  set --local expected (cat $CMDFILE_HELP_PATH)
+  test $expected = $actual
+
+Then 'he would be prompt with the current version of cmd'
+  set --local expected $CMDFILE_VERSION
+  test $expected = $actual

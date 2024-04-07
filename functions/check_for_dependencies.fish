@@ -1,5 +1,5 @@
 function cmdfile_check_for_dependencies
-    set --local dependencies yq gzip cat grep awk
+    set --local dependencies yq gzip cat grep gawk
     set --local dependency_not_found 0
 
     for dependency in $dependencies

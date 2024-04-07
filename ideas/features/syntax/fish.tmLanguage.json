@@ -1,0 +1,44 @@
+{
+  "scopeName": "source.fish",
+  "name": "Fish",
+  "fileTypes": [
+    "fish"
+  ],
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#functions"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.fish",
+          "match": "#.*$"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.fish",
+          "match": "\\b(if|else|end|function|begin|for|while|switch|case)\\b"
+        }
+      ]
+    },
+    "functions": {
+      "patterns": [
+        {
+          "name": "entity.name.function.fish",
+          "match": "\\bfunction\\s+([-_a-zA-Z0-9]+)"
+        }
+      ]
+    }
+  }
+}
