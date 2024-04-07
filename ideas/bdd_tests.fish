@@ -1,9 +1,9 @@
 function run_tests_from_file --description 'Run BDD tests from a file for any function'
-    set -l testfile $argv[1]
+    set --local testfile $argv[1]
 
-    set -l func_name
-    set -l arguments
-    set -l expected
+    set --local func_name
+    set --local arguments
+    set --local expected
 
     for line in (cat $testfile)
         switch $line
@@ -15,16 +15,16 @@ function run_tests_from_file --description 'Run BDD tests from a file for any fu
                 # Extract the expected outcome
                 set expected (string match -r '[0-9]+' $line)[1]
                 # Dynamically call the function with arguments
-                set -l result ($func_name $arguments)
+                set --local result ($func_name $arguments)
                 if test $result -eq $expected
                     echo "Test Passed: Given the function $func_name with arguments $arguments, expected $expected, got $result"
                 else
                     echo "Test Failed: Given the function $func_name with arguments $arguments, expected $expected, got $result"
                 end
                 # Reset for the next test case
-                set -e func_name
-                set -e arguments
-                set -e expected
+                set --erase func_name
+                set --erase arguments
+                set --erase expected
             case '*'
                 # Skip lines that are not 'Given' or 'Then'
         end
@@ -33,10 +33,10 @@ end
 
 
 function run_bdd_tests --description 'Run BDD tests from a file'
-    set -l testfile $argv[1]
-    set -l current_scenario
-    set -l command_to_run
-    set -l expected_output
+    set --local testfile $argv[1]
+    set --local current_scenario
+    set --local command_to_run
+    set --local expected_output
 
     for line in (cat $testfile)
         switch $line
@@ -49,15 +49,15 @@ function run_bdd_tests --description 'Run BDD tests from a file'
             case 'Then*'
                 set expected_output (string trim (string replace "Then the output should include \"" "" (string replace "\"" "" $line)))
                 # Here, execute the command_to_run and capture the output for comparison.
-                set -l actual_output (eval $command_to_run)
+                set --local actual_output (eval $command_to_run)
                 if string match -q "*$expected_output*" $actual_output
                     echo "Test Passed: $current_scenario"
                 else
                     echo "Test Failed: $current_scenario. Expected '$expected_output', got '$actual_output'"
                 end
                 # Reset for the next scenario
-                set -e command_to_run
-                set -e expected_output
+                set --erase command_to_run
+                set --erase expected_output
             case '*'
                 # Ignore empty lines or comments
         end
@@ -66,12 +66,12 @@ end
 
 
 function run_scenario --description 'Run a single test scenario'
-    set -l scenario_description $argv[1]
-    set -l command_to_run $argv[2]
-    set -l expected_output $argv[3]
+    set --local scenario_description $argv[1]
+    set --local command_to_run $argv[2]
+    set --local expected_output $argv[3]
 
     echo "Running scenario: $scenario_description"
-    set -l actual_output (eval $command_to_run)
+    set --local actual_output (eval $command_to_run)
 
     if string match -q "*$expected_output*" $actual_output
         echo "Test Passed: $scenario_description"
@@ -81,19 +81,19 @@ function run_scenario --description 'Run a single test scenario'
 end
 
 function run_bdd_tests --description 'Run BDD tests from a file, separating scenarios'
-    set -l testfile $argv[1]
-    set -l scenario_description
-    set -l command_to_run
-    set -l expected_output
+    set --local testfile $argv[1]
+    set --local scenario_description
+    set --local command_to_run
+    set --local expected_output
 
     for line in (cat $testfile)
         switch $line
             case 'Scenario:*'
-                if set -q command_to_run
+                if set --query command_to_run
                     run_scenario "$scenario_description" "$command_to_run" "$expected_output"
-                    set -e scenario_description
-                    set -e command_to_run
-                    set -e expected_output
+                    set --erase scenario_description
+                    set --erase command_to_run
+                    set --erase expected_output
                 end
                 set scenario_description (string trim (string replace "Scenario: " "" $line))
             case 'Given*' 'And*'
@@ -108,7 +108,7 @@ function run_bdd_tests --description 'Run BDD tests from a file, separating scen
     end
 
     # Ensure the last scenario is run if the file doesn't end with an empty line.
-    if set -q command_to_run
+    if set --query command_to_run
         run_scenario "$scenario_description" "$command_to_run" "$expected_output"
     end
 end

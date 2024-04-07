@@ -1,10 +1,10 @@
 function cmdfile_parse_arg --description 'Parse command argument into type, key, and value. Return type, key, and value in a format that can be parsed by awk.'
     # regular expression for matching key-value pairs in options, variables, and flags
-    set -l RE_FLAG_KEY_VALUE '^(?<dash>-{1,2})?(?<key>[a-z][a-z0-9_]*)(?:=(?<value>.+))?$'
+    set --local RE_FLAG_KEY_VALUE '^(?<dash>-{1,2})?(?<key>[a-z][a-z0-9_]*)(?:=(?<value>.+))?$'
 
     # regular expressions for matching keys of different types
-    set -l RE_KEY '^[a-z][a-z0-9_]*$'
-    set -l RE_VARIABLE_KEY '^[A-Z][A-Z0-9_]*$'
+    set --local RE_KEY '^[a-z][a-z0-9_]*$'
+    set --local RE_VARIABLE_KEY '^[A-Z][A-Z0-9_]*$'
 
     # parse the passed argument into $key and $value variables
     string match --quiet --regex --ignore-case --groups-only $RE_FLAG_KEY_VALUE -- $argv
@@ -16,11 +16,11 @@ function cmdfile_parse_arg --description 'Parse command argument into type, key,
     end
 
     # set default type to aliases
-    set -l type aliases
+    set --local type aliases
 
     # patch for dash-only value in flags
-    set -l flag_key false
-    if set -q dash; and test -n "$dash"
+    set --local flag_key false
+    if set --query dash; and test -n "$dash"
         if test (string length -- $dash) -gt 0
             set flag_key true
         end

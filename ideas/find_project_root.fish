@@ -9,7 +9,7 @@ function find_project_root
     set regex_pattern (string join "|" $root_indicators)
 
     # Start from the current directory
-    set -l current_dir (pwd)
+    set --local current_dir (pwd)
 
     while [ "$current_dir" != / ]
         # Use ls -a piped to grep to check for root indicators, including hidden files/folders
