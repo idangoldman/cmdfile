@@ -1,0 +1,13 @@
+name
+native
+feature
+background
+rule
+scenario
+scenarioOutline
+examples
+given
+when
+then
+and
+but
