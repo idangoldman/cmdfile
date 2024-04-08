@@ -6,7 +6,7 @@ for file in ../functions/*.fish
 end
 echo "SETUP => Loaded"
 
-# cmdfile_check_for_dependencies
+# dependencies yq gzip cat grep gawk
 # cmdfile_config_user_dir
 cmdfile_setup
 

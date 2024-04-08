@@ -1,7 +1,17 @@
-Given '`cmd` command exists' $command
+Given '`(.+)` command exists' $command
   set --function cmdfile $command
-  set --local actual (cat $CMDFILE_PATH)
+
+  set --local actual (cat $CMDFILE_USER_DIR)
   set --local expected (which $cmdfile)
+
+  test $expected = $actual
+
+Given '`(.+)` functiuon exists' $function
+  source $CMDFILE_USER_DIR/$function.fish
+
+  set --local actual (type $function)
+  set --local expected function
+
   test $expected = $actual
 
 When 'developer types `(.+)` into the console' $expression_to_run
