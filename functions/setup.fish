@@ -1,5 +1,5 @@
 function cmdfile_setup
-    cmdfile_check_for_dependencies
+    dependencies yq gzip cat grep gawk
 
     set --global --export CMDFILE_CONFIG_NAME "cmd.yml"
     set --global --export CMDFILE_CONFIG_NAMES "cmd.yml" "cmdfile.yml" "cmd.yaml" "cmdfile.yaml"

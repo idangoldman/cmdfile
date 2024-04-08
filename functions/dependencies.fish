@@ -1,8 +1,7 @@
-function cmdfile_check_for_dependencies
-    set --local dependencies yq gzip cat grep gawk
+function dependencies --description 'Check if dependencies are installed'
     set --local dependency_not_found 0
 
-    for dependency in $dependencies
+    for dependency in $argv
         if test -z (which $dependency)
             echo "Dependency $dependency not found."
             set dependency_not_found 1
