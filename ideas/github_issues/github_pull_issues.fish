@@ -1,10 +1,7 @@
-function pull_github_issues
-    verify_github_repo
-    or exit
+function github_pull_issues --argument-names repo folder
+    set --local issues (gh issue list --repo $repo --json number,title --jq '.[] | "\(.number)\t\(.title)"')
 
-    set --local folder exists_or_create --folder .github/issues
-
-    for issue in list_github_issues
+    for issue in $issues
         set issue_number (echo $issue | cut -f1)
         set issue_title (echo $issue | cut -f2- | string replace -a '/' '_')
 
