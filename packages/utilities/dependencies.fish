@@ -1,4 +1,4 @@
-function dependencies --description 'Check if dependencies are installed'
+function dependencies --description "Check if dependencies are installed"
     set --local dependency_not_found 0
 
     for dependency in $argv
