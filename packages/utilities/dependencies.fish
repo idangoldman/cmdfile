@@ -3,7 +3,7 @@ function dependencies --description "Check if dependencies are installed"
 
     for dependency in $argv
         if test -z (which $dependency)
-            echo "Dependency $dependency not found."
+            echo "Dependency $dependency not found. Please install it before proceeding."
             set dependency_not_found 1
         end
     end

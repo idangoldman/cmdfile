@@ -1,4 +1,5 @@
 function create_file --description 'Create a file if it does not exist' --argument-names file
+
     if test -z $file
         echo "File path is required"
         return 1
