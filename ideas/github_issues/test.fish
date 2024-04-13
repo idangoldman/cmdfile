@@ -1,11 +1,7 @@
 #!/usr/bin/env fish
 
-for file in ../../packages/utilities/*.fish
-    echo "Loading $file"
-    source $file
-end
-
 dependencies mkdir touch gh gawk yq jq
+sources ../../packages/utilities/*.fish
 
 # exists_or_create folder blah
 # exists_or_create file dude/blah.txt
