@@ -1,9 +1,6 @@
 #!/usr/bin/env fish
 
-for file in ../functions/*.fish
-    echo "Loading $file"
-    source $file
-end
+sources "../functions"
 echo "SETUP => Loaded"
 
 # dependencies yq gzip cat grep gawk

@@ -1,4 +1,4 @@
-function cmdfile_parse_arg --description 'Parse command argument into type, key, and value. Return type, key, and value in a format that can be parsed by awk.'
+function parse_arg --description 'Parse command argument into type, key, and value. Return type, key, and value in a format that can be parsed by awk.'
     # regular expression for matching key-value pairs in options, variables, and flags
     set --local RE_FLAG_KEY_VALUE '^(?<dash>-{1,2})?(?<key>[a-z][a-z0-9_]*)(?:=(?<value>.+))?$'
 

@@ -1,9 +1,9 @@
-function cmdfile_parse_args --description 'Parse arguments into a JSON object using yq'
+function parse_args --description 'Parse arguments into a JSON object using yq'
     set --local arguments "{aliases: [], options: {}, variables: {}, flags: {}}"
     set --local found_non_alias 0
 
     for argument in $argv
-        set --local parsed_argument (cmdfile_parse_arg $argument)
+        set --local parsed_argument (parse_arg $argument)
 
         set --local type (echo $parsed_argument | awk '{print $1}')
         set --local key (echo $parsed_argument | awk '{print $2}')

@@ -7,7 +7,7 @@ Given '`(.+)` command exists' $command
   test $expected = $actual
 
 Given '`(.+)` functiuon exists' $function
-  source $CMDFILE_USER_DIR/$function.fish
+  sources $CMDFILE_USER_DIR/$function.fish
 
   set --local actual (type $function)
   set --local expected function
