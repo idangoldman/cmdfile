@@ -31,5 +31,5 @@ function find_package_path --argument path
     end
 
     echo "Node package root directory not found" >&2
-    exit 1
+    return 1
 end

@@ -1,6 +1,6 @@
 function github_issues --argument-names action
     set --local repo github_verify_repo
-    or exit
+    or return 1
 
     set --local folder .github/issues
     exists_or_create folder $folder

@@ -12,7 +12,7 @@ function cmdfile_config_find
 
     if test (count $found_paths) -eq 0
         echo "No configuration file found."
-        exit 1
+        return 1
     else if test (count $found_paths) -gt 1
         echo $found_paths[1]
     else

@@ -39,7 +39,7 @@ end
 # Main execution
 if test (count $argv) -ne 2
     echo "Usage: $argv[0] <source_file> <output_folder>"
-    exit 1
+    return 1
 end
 
 set --local source_file argv[1] # favicon.svg

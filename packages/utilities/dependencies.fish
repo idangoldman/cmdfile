@@ -9,6 +9,6 @@ function dependencies --description "Check if dependencies are installed"
     end
 
     if test $dependency_not_found -eq 1
-        exit 1
+        return 1
     end
 end
