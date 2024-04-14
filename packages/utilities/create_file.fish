@@ -1,8 +1,7 @@
 function create_file --description 'Create a file if it does not exist' --argument-names file
 
     if test -z $file
-        echo "File path is required"
-        return 1
+        echo "File path is required"; and return 1
     end
 
     if not test -e $file
@@ -10,5 +9,5 @@ function create_file --description 'Create a file if it does not exist' --argume
         touch $file
     end
 
-    echo $file
+    echo (realpath $file); and return 0
 end

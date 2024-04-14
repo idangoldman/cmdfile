@@ -1,6 +1,6 @@
 function exists_or_create --description "Create a folder if it does not exist" --argument-names type path
     if test -e $path
-        echo $path
+        echo (realpath $path)
         return 0
     end
 
