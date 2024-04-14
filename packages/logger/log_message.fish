@@ -2,7 +2,7 @@ alias log_msg "log_message $argv"
 
 function log_message
   set --local help_file_path (realpath (dirname (status --current-filename))/help.txt)
-  set --local log_file_path  (pwd -P)/log.txt
+  set --local log_file_path  $PWD/log.txt
 
   argparse v/verbose h/help -- $argv
   or begin
@@ -31,16 +31,20 @@ function log_message
       return 1
   end
 
-  set --local timestamp (date "+%Y-%m-%d %H:%M:%S")
   set level (string upper $level)
+  set --local timestamp (date "+%Y-%m-%d %H:%M:%S")
+  set --local verbose_mode 0
   set --local formatted_message "[$timestamp][$level] $message"
+
   echo $formatted_message >> $log_file_path
 
-  set --local verbose_mode 0
   if set --query _flag_verbose
     set verbose_mode 1
   end
+
   if test $verbose_mode -eq 1
       echo $formatted_message
   end
+
+  return 0
 end

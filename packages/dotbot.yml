@@ -20,3 +20,7 @@
     ~/.config/fish/plugins/functions/:
         glob: true
         path: utilities/*
+
+- link:
+    ~/.config/fish/plugins/functions/log_message.fish:
+        path: logger/log_message.fish

@@ -1,6 +1,6 @@
 function cmdfile_config_find
     set --local found_paths
-    set --local current_dir (pwd -P)
+    set --local current_dir $PWD
 
     if test -f "$current_dir/$CMDFILE_CONFIG_NAME"
         set --append found_paths "$current_dir/$CMDFILE_CONFIG_NAME"

@@ -21,7 +21,7 @@ function sources --description 'Source all files in the given list of arguments'
     for path in $paths
         if not contains $path $current_file $caller_file
             source $path
-            echo "Sourced: $path"
+            # echo "Sourced: $path"
         end
     end
 end
