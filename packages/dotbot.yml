@@ -1,0 +1,22 @@
+# Link:
+# command dotbot --exit-on-failure --force-color --verbose --base-directory=. --config-file=dotbot.yml --only link
+
+# Unlink:
+# command dotbot --exit-on-failure --force-color --verbose --base-directory=. --config-file=dotbot.yml --only clean
+
+# 4 spaces format thing...
+
+- defaults:
+    link:
+        create: true
+        force: true
+        relink: true
+
+- clean:
+    ~/.config/fish/plugins/functions/:
+        force: true
+
+- link:
+    ~/.config/fish/plugins/functions/:
+        glob: true
+        path: utilities/*
