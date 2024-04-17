@@ -1,0 +1,32 @@
+type: object
+properties:
+  dotfiles:
+    type: array
+    items:
+      type: object
+      properties:
+        source: { type: string }
+        target: { type: string }
+      required: [source, target]
+  scripts:
+    type: array
+    items:
+      type: object
+      properties:
+        command: { type: string }
+      required: [command]
+  directories:
+    type: array
+    items:
+      type: object
+      properties:
+        path: { type: string }
+      required: [path]
+  clean:
+    type: array
+    items:
+      type: object
+      properties:
+        target: { type: string }
+      required: [target]
+required: [dotfiles, scripts, directories, clean]

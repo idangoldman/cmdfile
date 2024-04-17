@@ -1,0 +1,19 @@
+dotfiles:
+  - source: .bashrc
+    target: ~/.bashrc
+  - source: .vimrc
+    target: ~/.vimrc
+  - source: .gitconfig
+    target: ~/.gitconfig
+
+scripts:
+  - command: "echo Hello, this is a script execution test"
+  - command: "fish_update_completions"
+
+directories:
+  - path: ~/projects
+  - path: ~/scripts
+
+clean:
+  - target: ~/old_config.bak
+  - target: ~/temporary_files
