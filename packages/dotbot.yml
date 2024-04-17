@@ -11,6 +11,7 @@
         create: true
         force: true
         relink: true
+        exclude: ['dotbot.yml']
 
 - clean:
     ~/.config/fish/plugins/functions/:
@@ -19,8 +20,4 @@
 - link:
     ~/.config/fish/plugins/functions/:
         glob: true
-        path: utilities/*
-
-- link:
-    ~/.config/fish/plugins/functions/log_message.fish:
-        path: logger/log_message.fish
+        path: ./**
