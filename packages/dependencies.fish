@@ -1,14 +1,8 @@
-function dependencies --description "Check if dependencies are installed"
-    set --local dependency_not_found 0
-
-    for dependency in $argv
-        if test -z (which $dependency)
-            echo "Dependency $dependency not found. Please install it before proceeding."
-            set dependency_not_found 1
+function dependencies --description "Check for existence of dependencies, and return 1 on the first missing one"
+    for command in $argv
+        if not type --query $command
+            echo "Command `$command` not found. Please install it before proceeding." >&2
+            return 1
         end
-    end
-
-    if test $dependency_not_found -eq 1
-        return 1
     end
 end

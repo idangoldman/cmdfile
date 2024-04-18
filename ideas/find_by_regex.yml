@@ -1,0 +1,20 @@
+- name: git_and_github
+  pattern: "^({{ items }})$"
+  items:
+    - .git
+    - .github
+
+- name: node_version
+  pattern: "^({{ items }})$"
+  items:
+    - .node-version
+    - .nvmrc
+
+- name: ruby_version
+  pattern: "^({{ items }})$"
+  items:
+    - .ruby-version
+    - .rbenv-version
+    - .rvmrc
+    - Gemfile
+    - Gemfile.lock
