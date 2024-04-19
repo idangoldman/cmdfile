@@ -1,3 +1,4 @@
+# find_package_manager "node"
 function find_package_manager --description "Find the package manager for the current directory"
     set --local current_folder $PWD
 

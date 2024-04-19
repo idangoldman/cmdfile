@@ -6,10 +6,21 @@ version_files:
   node:
     - .node-version
     - .nvmrc
-    # - package.json
   ruby:
     - .ruby-version
     - .rbenv-version
     - .rvmrc
-    # - Gemfile
-    # - Gemfile.lock
+
+package_files:
+  node: package.json
+  ruby: Gemfile
+
+package_locks:
+  node:
+    pnpm: pnpm-lock.yaml
+    yarn: yarn.lock
+    npm:  package-lock.json
+    deno: deno.lock
+    bun:  bun.lockb
+  ruby:
+    bundler: Gemfile.lock
