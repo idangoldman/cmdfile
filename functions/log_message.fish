@@ -1,7 +1,7 @@
 # TODO: alias log_msg "log_message $argv"
 
 function log_message
-    set --local help_file_path (realpath (dirname (status --current-filename))/usage/log_message.txt)
+    set --local help_file_path "$CMDFILE_MANUALS_PATH/log_message.txt"
     set --local caller_basename (basename (status stack-trace | awk '/file/ {file=$NF} END {print file}'))
     set --local log_file_path $PWD/$caller_basename.log
 
