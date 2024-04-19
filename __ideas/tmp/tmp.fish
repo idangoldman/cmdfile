@@ -9,6 +9,6 @@ function tmp
             eval $argv
             return $status
         case '*'
-            emit usage_file tmp
+            emit manual_file tmp
     end
 end

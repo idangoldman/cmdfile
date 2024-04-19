@@ -1,4 +1,4 @@
 #!/usr/bin/env fish
 
-sources npm.fish
+sources "$CMDFILE_PATH/__ideas/node/npm.fish"
 npm

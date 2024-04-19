@@ -4,7 +4,7 @@
 # Unlink:
 # command dotbot --exit-on-failure --force-color --verbose --base-directory=. --config-file=dotbot.yml --only clean
 
-# 4 spaces format thing...
+# 4 space indentation is required
 
 - defaults:
     link:
@@ -17,7 +17,18 @@
     ~/.config/fish/plugins/functions/:
         force: true
 
+    ~/.config/fish/plugins/manuals/:
+        force: true
+
 - link:
     ~/.config/fish/plugins/functions/:
         glob: true
-        path: ./**
+        path: functions/*
+
+    ~/.config/fish/plugins/conf.d/:
+        glob: true
+        path: conf.d/*
+
+    ~/.config/fish/plugins/manuals/:
+        glob: true
+        path: manuals/*

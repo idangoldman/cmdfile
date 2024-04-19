@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-sources "functions/parser"
+sources "$CMDFILE_PATH/functions/parser"
 
 # PARSE ARG EXAMPLE TESTS
 parse_arg --flag1=value1

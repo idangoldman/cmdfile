@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-sources ../cmdfile.fish
+sources "$CMDFILE_PATH/__ideas/cmdfile/cmdfile.fish"
 echo "CMDFILE => Loaded"
 
 # cmd --help

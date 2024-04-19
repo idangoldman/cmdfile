@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-sources "../functions"
+sources "$CMDFILE_PATH/__ideas/cmdfile"
 echo "SETUP => Loaded"
 
 # dependencies yq gzip cat grep gawk
