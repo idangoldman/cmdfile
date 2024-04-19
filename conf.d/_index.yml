@@ -1,0 +1,15 @@
+git_and_github:
+  - .git
+  - .github
+
+version_files:
+  node:
+    - .node-version
+    - .nvmrc
+    # - package.json
+  ruby:
+    - .ruby-version
+    - .rbenv-version
+    - .rvmrc
+    # - Gemfile
+    # - Gemfile.lock
