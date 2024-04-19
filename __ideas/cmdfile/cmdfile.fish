@@ -24,5 +24,3 @@ function cmdfile -d "Command line tool"
         return 0
     end
 end
-
-alias cmd="cmdfile"

@@ -20,6 +20,9 @@
     ~/.config/fish/plugins/manuals/:
         force: true
 
+    ~/.config/fish/plugins/conf.d/:
+        force: true
+
 - link:
     ~/.config/fish/plugins/functions/:
         glob: true
