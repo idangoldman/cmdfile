@@ -1,0 +1,60 @@
+defaults:
+  locals: "@/config/env.yml"
+
+assets:
+  arguments:
+    src: assets/**/{*, !favicon.svg}
+    dest: tmp/public
+  command: cp $src $dest
+
+clean:
+  arguments:
+    - tmp/**/*
+  command: rm -vrf $arguments
+
+scripts:
+  sequence: pipe
+  arguments:
+    src: scripts/site.coffee
+    dest: tmp/public/scripts/site.js
+  command:
+    - "coffee --bare --compile=$src"
+    - "esbuild --bundle --source-file=$src outfile=$dest"
+
+styles:
+  arguments:
+    includes:
+      - node_modules
+      - styles
+      - assets
+    src: styles/site.styl
+    dest: tmp/public/styles/site.css
+  command: |
+    stylus --include-css {{ each $includes '--include=$value' }} $src $dest
+
+templates:
+  arguments:
+    content: tmp/content/**/*.yml
+    src: templates
+    dest: tmp/public
+    options: {}
+  command: |
+    ruby #/tools/slim/boot.rb {{ json $arguments }}
+
+content:
+  sequence: parallel
+  arguments:
+    config_file: {{ locals .remark }}
+    src:
+      - content/**/*.md
+      - "!content/drafts/**/*"
+    dest: tmp/content
+  command: |
+    remark-cli --rc-path=$config_file --output=$dest $src
+
+favicons:
+  arguments:
+    src: assets/favicon.svg
+    dest: tmp/public/assets/favicons
+  command: |
+    favicon_generator $arguments

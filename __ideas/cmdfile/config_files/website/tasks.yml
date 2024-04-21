@@ -1,0 +1,13 @@
+build:
+  - clean
+  - assets, favicons, scripts, styles
+  - content
+  - templates
+
+dev:
+  - build
+  - server, watch
+
+dist:
+  - build
+  - deploy

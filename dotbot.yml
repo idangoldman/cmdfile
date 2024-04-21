@@ -1,17 +1,15 @@
-# Link:
-# command dotbot --exit-on-failure --force-color --verbose --base-directory=. --config-file=dotbot.yml --only link
-
-# Unlink:
-# command dotbot --exit-on-failure --force-color --verbose --base-directory=. --config-file=dotbot.yml --only clean
-
+# Update cmdfile fish linkage and clean up the fish plugins directory for the fish shell.
 # 4 space indentation is required
+
+# Usage: cmdfile_dotbot
+
 
 - defaults:
     link:
         create: true
+        exclude: ['dotbot.yml']
         force: true
         relink: true
-        exclude: ['dotbot.yml']
 
 - clean:
     ~/.config/fish/plugins/functions/:
