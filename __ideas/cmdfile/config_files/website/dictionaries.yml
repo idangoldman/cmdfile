@@ -23,7 +23,7 @@
         title:
             titleize: true
         social.link:
-        encode: true
+            encode: true
 
 -
   dictionary: meta
