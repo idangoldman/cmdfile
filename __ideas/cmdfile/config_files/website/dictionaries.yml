@@ -1,0 +1,59 @@
+-
+    dictionary: page
+
+    lexicons:
+        - site
+        - content
+
+    vocabulary:
+        - date
+        - layout
+        - html
+        - permalink
+        - tags
+        - title
+
+    grammar:
+        date:
+            format: "YYYY-MM-DD"
+        html:
+            escape: false
+            alias: content
+        tags: []
+        title:
+            titleize: true
+        social.link:
+        encode: true
+
+-
+  dictionary: meta
+
+  lexicons:
+      - site.meta
+      - page
+
+  vocabulary:
+      - date
+      - description
+      - json_ld
+      - robots
+      - tags
+      - title
+      - permalink
+
+  grammar:
+      date:
+          format: "YYYY-MM-DD"
+      description:
+          shorten: 160
+      json_ld:
+          parse: json
+      robots: "noindex, nofollow"
+      tags:
+          alias: keywords
+          default: []
+      title:
+          shorten: 60
+          titleize: true
+      permalink:
+          encode: true
