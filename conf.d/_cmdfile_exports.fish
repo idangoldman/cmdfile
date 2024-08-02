@@ -1,4 +1,4 @@
-set --global --export CMDFILE_PATH             (dirname (realpath (status --current-filename)/..))
+set --global --export CMDFILE_PATH             (dirname (realpath (status --current-filename))/..)
 set --global --export CMDFILE_COMPLETIONS_PATH "$CMDFILE_PATH/completions"
 set --global --export CMDFILE_CONFD_PATH       "$CMDFILE_PATH/conf.d"
 set --global --export CMDFILE_FUNCTIONS_PATH   "$CMDFILE_PATH/functions"
