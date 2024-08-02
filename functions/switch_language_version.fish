@@ -1,6 +1,10 @@
 # FNM has a good take on how to deal and switch between versions in thier `fnm help` command
 
 function switch_language_version --argument-names languages
+    if not test (uname) = Darwin
+        return
+    end
+
     dependencies cat yq fnm rbenv
 
     set languages (string split ' ' (string lower $languages))

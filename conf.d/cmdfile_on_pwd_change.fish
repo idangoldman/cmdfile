@@ -1,7 +1,3 @@
-if not test (uname) = Darwin
-    return
-end
-
 function on_pwd_change --on-variable PWD
     switch_language_version "node ruby"
 
