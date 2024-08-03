@@ -1,5 +1,8 @@
 function create_folders --description 'Create folders via a list of paths'
-    argparse trailing --description 'Default: false, if true, will create folders by the last trailing slash in each the path' -- $argv
+    argparse 't/trailing' \
+        --ignore-unknown \
+        --help 'if `--trailing` flag exists, it will create folders based on the last path segment' \
+        -- $argv or return
 
     set --local folders $argv
 
