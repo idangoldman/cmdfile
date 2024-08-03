@@ -4,7 +4,7 @@ function create_folders --description 'Create folders via a list of paths'
     set --local folders $argv
 
     for folder in $folders
-        if test $_flag_trailing -eq 1; and string match --quiet --regex '.+\/$' $folder
+        if set --query _flag_trailing; and not string match --quiet --regex '.+/$' $folder
             set folder (dirname $folder)
         end
 
