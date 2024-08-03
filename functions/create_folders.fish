@@ -1,5 +1,5 @@
 function create_folders --description 'Create folders via a list of paths'
-    argparse 't/trailing' \
+    argparse t/trailing \
         --ignore-unknown \
         --help 'if `--trailing` flag exists, it will create folders based on the last path segment' \
         -- $argv or return
