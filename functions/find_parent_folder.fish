@@ -7,7 +7,7 @@ function find_parent_folder --description 'Find the target path in the source pa
     end
 
     if string match --quiet --regex --ignore-case --groups-only $regex_path $source_path
-        echo $found_folder
+        string trim --right --chars="/" $found_folder
         return 0
     end
 
