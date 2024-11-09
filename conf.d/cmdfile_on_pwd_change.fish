@@ -5,7 +5,7 @@ function on_pwd_change --on-variable PWD
         set --global --export --append PYTHONPATH (pwd -P)
     end
 
-    if test -f $PWD/flake.lock
-        nix develop --impure
-    end
+    # if test -f $PWD/flake.lock
+    #     nix develop --impure
+    # end
 end
