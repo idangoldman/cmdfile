@@ -5,7 +5,8 @@ function switch_language_version --argument-names languages
         return
     end
 
-    dependencies cat yq fnm rbenv
+    # dependencies cat yq fnm rbenv
+    dependencies cat yq fnm
 
     set languages (string split ' ' (string lower $languages))
     set --local version_regex '([0-9]+(?:[\.-][0-9a-z]+)*)'
@@ -27,9 +28,8 @@ function switch_language_version --argument-names languages
             switch $language
                 case node
                     fnm use $current_version --silent-if-unchanged
-                case ruby
-                    rbenv shell $current_version
-                    # rbenv local $current_version
+                    # case ruby
+                    #     rbenv shell $current_version
             end
         end
     end
